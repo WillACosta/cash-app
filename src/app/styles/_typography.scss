@@ -1,4 +1,13 @@
-$font: "Poppins";
+$font: "Inter";
+
+html {
+  font-family: $font, "Helvetica Neue", sans-serif;
+  font-size: rem-calc(16);
+}
+
+body {
+  color: var(--textPrimary);
+}
 
 @media (max-width: 1080px) {
   html {
@@ -10,14 +19,4 @@ $font: "Poppins";
   html {
     font-size: 87.5%;
   }
-}
-
-html {
-  font-family: $font, sans-serif;
-  font-size: getRemMeasure(16);
-}
-
-@function getRemMeasure($size) {
-  $value: $size / 16;
-  @return #{$value}rem;
 }
