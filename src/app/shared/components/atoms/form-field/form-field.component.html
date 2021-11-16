@@ -1,0 +1,18 @@
+<mat-form-field appearance="outline">
+  <mat-label>{{ label }}</mat-label>
+  <input matInput *ngIf="!obscureText" placeholder="{{ placeholder }}" />
+  <input
+    matInput
+    *ngIf="obscureText"
+    [type]="hideText ? 'password' : 'text'"
+    placeholder="{{ placeholder }}"
+  />
+  <mat-icon matPrefix *ngIf="prefixIcon">{{ prefixIcon }}</mat-icon>
+  <button
+    *ngIf="obscureText"
+    mat-icon-button
+    matSuffix
+    (click)="togleInputVisibility()">
+    <mat-icon>{{ hideText ? "visibility_off" : "visibility" }}</mat-icon>
+  </button>
+</mat-form-field>

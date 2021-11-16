@@ -1,30 +1,47 @@
-<div class="app-container">
-  <aside>
-    <img src="assets/payment.svg"
-      alt="Ilustração de um homem de pele escura segurando um cartão de crédito na cor verde">
-  </aside>
+<div class="container">
+  <div class="row pt-5">
+    <div class="col-12">
+      <app-logo type="light"></app-logo>
+    </div>
+  </div>
 
-  <main>
-    <div class="greeting">
-      <h1>Boas vindas!</h1>
-      <p class="app-text-muted">
-        Aqui você poderá fazer o acompanhamento de toda a sua vida financeira de forma simples e
-        muito mais :)
-      </p>
+  <div class="row full-height">
+    <div class="col-12 col-md-12 col-lg-8 col-xl-8 centralize">
+      <div class="illustration-container">
+        <img
+          src="assets/payment.svg"
+          alt="Ilustração de um homem de pele escura segurando um cartão de crédito na cor verde"
+        />
+      </div>
     </div>
 
-    <form>
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput placeholder="exemplo@email.com">
-        <mat-icon matPrefix>mail_outline</mat-icon>
-      </mat-form-field>
+    <div class="col-12 col-md-12 col-lg-4 col-xl-4 centralize">
+      <main>
+        <div class="greeting">
+          <h1 class="app-text-head">Boas vindas!</h1>
+          <p class="app-text-muted">
+            Aqui você poderá fazer o acompanhamento de toda a sua vida
+            financeira de forma simples e muito mais :)
+          </p>
+        </div>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Senha</mat-label>
-        <input matInput placeholder="exemplo@email.com">
-        <mat-icon matPrefix>lock_outline</mat-icon>
-      </mat-form-field>
-    </form>
-  </main>
+        <form>
+          <app-form-field
+            label="Email"
+            placeholder="nome@exemplo.com"
+            prefixIcon="mail_outline">
+          </app-form-field>
+
+          <app-form-field
+            label="Senha"
+            placeholder="Digite sua senha"
+            prefixIcon="lock_outline"
+            [obscureText]="true">
+          </app-form-field>
+
+          <button mat-flat-button color="primary">Entrar</button>
+        </form>
+      </main>
+    </div>
+  </div>
 </div>

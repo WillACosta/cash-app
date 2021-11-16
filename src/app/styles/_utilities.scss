@@ -1,3 +1,8 @@
 .app-text-muted {
   color: var(--textVariant);
 }
+
+.app-text-head {
+  font-size: rem-calc(32);
+  font-weight: 300;
+}
