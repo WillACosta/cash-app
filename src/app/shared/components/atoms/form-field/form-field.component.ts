@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-form-field',
@@ -12,8 +13,10 @@ export class FormFieldComponent implements OnInit {
   @Input() placeholder?: String;
   @Input() prefixIcon?: String;
   @Input() obscureText?: Boolean;
+  @Input() modelName?: String;
 
   hideText: Boolean = true;
+  inputFormControl: FormControl = new FormControl();
 
   ngOnInit(): void {}
 

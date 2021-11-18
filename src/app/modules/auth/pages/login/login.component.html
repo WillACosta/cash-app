@@ -25,21 +25,46 @@
           </p>
         </div>
 
-        <form>
-          <app-form-field
-            label="Email"
-            placeholder="nome@exemplo.com"
-            prefixIcon="mail_outline">
-          </app-form-field>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              placeholder="exemplo@email.com"
+              formControlName="email"
+            />
+            <mat-icon matPrefix>mail_outline</mat-icon>
+          </mat-form-field>
 
-          <app-form-field
-            label="Senha"
-            placeholder="Digite sua senha"
-            prefixIcon="lock_outline"
-            [obscureText]="true">
-          </app-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Senha</mat-label>
+            <input
+              [type]="hideText ? 'password' : 'text'"
+              matInput
+              placeholder="Digite sua senha"
+              formControlName="password"
+            />
 
-          <button mat-flat-button color="primary">Entrar</button>
+            <mat-icon matPrefix>lock_outline</mat-icon>
+            <button mat-icon-button matSuffix (click)="togleInputVisibility()">
+              <mat-icon>{{
+                hideText ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <app-loading-button *ngIf="pageState == PageStateType.loading">
+          </app-loading-button>
+
+          <button
+            mat-flat-button
+            color="primary"
+            type="submit"
+            [disabled]="loginForm.invalid"
+            *ngIf="pageState != PageStateType.loading"
+          >
+            Entrar
+          </button>
         </form>
       </main>
     </div>
