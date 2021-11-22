@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         tap(() => (this.pageState = PageState.loaded))
       )
       .subscribe(() => {
-        this.router.navigate(['/auth/register']);
+        this.router.navigate(['']);
       });
 
     this.loginErrorSubscription = this.actions

@@ -18,7 +18,10 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      positionClass: 'toast-top-center',
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      closeButton: true,
+      progressBar: true,
     }),
     NgxsModule.forRoot([], {
       developmentMode: true,
