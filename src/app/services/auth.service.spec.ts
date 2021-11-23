@@ -29,7 +29,7 @@ describe('AuthService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should request to login and return user token', () => {
+  it('should request to login and return user token', (done) => {
     const fakeBody = JSON.stringify({
       email: 'email@example.com',
       password: '123fake',
@@ -37,6 +37,7 @@ describe('AuthService', () => {
 
     service.login('email@example.com', '123fake').subscribe((response) => {
       expect(response).toEqual({} as Account);
+      done();
     });
 
     const req = httpMock.expectOne('https://reqres.in/api/login');
