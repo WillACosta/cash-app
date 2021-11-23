@@ -1,3 +1,3 @@
 export interface Account {
-  token: string;
+  token: string | null;
 }

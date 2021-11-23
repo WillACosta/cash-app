@@ -16,9 +16,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthService } from 'src/app/services/auth.service';
 
-import { NgxsModule } from '@ngxs/store';
-import { AuthState } from './store/state/auth.state';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -32,9 +29,6 @@ import { AuthState } from './store/state/auth.state';
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    NgxsModule.forFeature([
-      AuthState,
-    ])
   ],
   declarations: [RegisterComponent, LoginComponent],
   providers: [AuthService],

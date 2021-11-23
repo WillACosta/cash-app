@@ -7,14 +7,10 @@ import { AuthService } from 'src/app/services/auth.service';
 
 import { Login } from '../actions/auth.actions';
 
-export class AuthStateModel {
-  account: Account | null;
-}
-
-@State<AuthStateModel>({
+@State<Account>({
   name: 'auth',
   defaults: {
-    account: null,
+    token: null,
   },
 })
 @Injectable()
@@ -22,21 +18,21 @@ export class AuthState {
   constructor(private authService: AuthService) {}
 
   @Selector()
-  static isAuthenticated(state: AuthStateModel) {
-    return !!state.account;
+  static token(state: Account): string | null {
+    return state.token;
+  }
+
+  @Selector()
+  static isAuthenticated(state: Account) {
+    return !!state.token;
   }
 
   @Action(Login)
-  login(
-    { getState, patchState }: StateContext<AuthStateModel>,
-    { payload }: Login
-  ) {
+  login({ patchState }: StateContext<Account>, { payload }: Login) {
     return this.authService.login(payload.email!, payload.password!).pipe(
       tap((result: Account) => {
         patchState({
-          account: {
-            token: result.token,
-          },
+          token: result.token,
         });
       })
     );
