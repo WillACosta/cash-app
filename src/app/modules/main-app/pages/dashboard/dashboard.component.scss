@@ -1,0 +1,44 @@
+@import "../../../../styles/rem-calc";
+
+main {
+  height: 100vh;
+  padding: rem-calc(32 0);
+
+  h1 {
+    color: var(--textVariant);
+  }
+
+  .transaction-resum-container {
+    background-color: var(--surface);
+    padding: rem-calc(40 25);
+    border-radius: rem-calc(10);
+
+    display: flex;
+    justify-content: space-between;
+
+    .resum-item {
+      display: flex;
+      flex-direction: column;
+
+      span {
+        font-size: rem-calc(13);
+        font-weight: 200;
+        color: var(--textVariant);
+      }
+
+      strong {
+        font-size: rem-calc(23);
+        font-weight: 500;
+        color: var(--textPrimary);
+
+        margin-top: rem-calc(10);
+      }
+
+      &:last-child {
+        strong {
+          color: var(--primary);
+        }
+      }
+    }
+  }
+}

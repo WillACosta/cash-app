@@ -1,9 +1,13 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-
 # CashApp
 
 Aplicação de registros financeiros desenvolvida em Angular 13.
+
+## Protótipo do projeto
+
+https://www.figma.com/file/XDP3UijlKEZH1a78jTs6Vi/Desafio-PDZ?node-id=0%3A1
+
 
 ## API
 
@@ -15,34 +19,46 @@ Aplicação de registros financeiros desenvolvida em Angular 13.
 
 ### Rotas Disponíveis
 
-GET: /tasks
-POST: /tasks
-PUT: /tasks
-PATCH: /tasks
-DELETE: /tasks
+As rotas suportam todos os verbos HTTP
+
+Url base: `http://localhost:3000`
+
+`/transactions`
 
 #### Paginação
 
-GET: /tasks?\_page=7
-GET: /tasks?\_page=7&\_limit=20
-
-GET: /account
-POST: /account
-PUT: /account
-PATCH: /account
-DELETE: /account
+GET `/transactions?\_page=7&\_limit=20`
 
 #### Models
 
-Tasks - Esta é a lista com agenda de pagamentos. Aqui você cadastrar, editar e excluir um pagamento.
-{ "id": 5, "name": "Anthea Pundy", "username": "apundy4", "title": "Software Engineer III", "value": 177.19, "date": "2021-01-01T14:09:51Z", "image": "https://robohash.org/quiaautomnis.png?size=150x150&set=set1", "isPayed": true },
+```javascript
+//  JSON de saídas
+{
+   "id": "1",
+   "amount": "150",
+   "currency": "BRL",
+   "created_at": "2018-01-01T00:00:00Z",
+   "source": "expanse",
+   "isPayed": "true",
+   "description": "Pagamento de conta de energia"
+},
 
-Account - Usuário para efetuar Login da plataforma
-{ "id": 0, "name": "usuario", "email": "usuario@gmail.com", "password": "usuario" }
+// JSON de entradas
+{
+   "id": "2",
+   "amount": "1260",
+   "currency": "BRL",
+   "created_at": "2018-01-01T00:00:00Z",
+   "source": "incoming",
+   "description": "Salário do mês"
+},
+```
 
 ### Rotas de autenticação
 
-`api/login`
+URL Base: `https://reqres.in/api`
+
+`/login`
 
 ```javascript
 {

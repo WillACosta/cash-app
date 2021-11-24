@@ -4,7 +4,7 @@ $gradient: linear-gradient(120deg, #7de591 0%, #111111 100%);
 $backgroundLight: #ffffff;
 $backgroundDark: #111111;
 
-$surfaceLight: #ededed;
+$surfaceLight: #f5f4f4;
 $surfaceDark: #2c2c2c;
 
 $textColorLight: #636363;
@@ -16,6 +16,7 @@ $textColorDark: #828282;
   --textPrimary: #{$backgroundDark};
   --textVariant: #{$textColorLight};
   --surface: #{$surfaceLight};
+  --background: #{$backgroundLight};
 }
 
 .dark-theme {
@@ -24,4 +25,5 @@ $textColorDark: #828282;
   --textPrimary: #{$backgroundLight};
   --textVariant: #{$textColorDark};
   --surface: #{$surfaceDark};
+  --background: #{$backgroundDark};
 }
