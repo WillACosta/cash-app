@@ -44,6 +44,20 @@ aside {
     span {
       color: var(--textVariant);
     }
+
+    a {
+      text-decoration: none;
+    }
+
+    .active {
+      color: var(--primary);
+      text-decoration: none;
+
+      mat-icon,
+      span {
+        color: var(--primary);
+      }
+    }
   }
 
   button {

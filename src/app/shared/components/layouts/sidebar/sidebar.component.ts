@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
-import { Subscription, tap } from 'rxjs';
+import { Subscription } from 'rxjs';
 
+import { sidebarMenuItems } from 'src/app/core/utils/constants';
 import { Logout } from 'src/app/modules/auth/store/actions/auth.actions';
 
 @Component({
@@ -12,27 +13,7 @@ import { Logout } from 'src/app/modules/auth/store/actions/auth.actions';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  menuItems = [
-    {
-      name: 'Dashboard',
-      showName: 'Painel',
-      routeName: 'dashboard',
-      icon: 'home_outline',
-    },
-    {
-      name: 'Transactions',
-      showName: 'Transações',
-      routeName: 'transactions',
-      icon: 'paid_outline',
-    },
-    {
-      name: 'Settings',
-      showName: 'Configurações',
-      routeName: 'settings',
-      icon: 'settings_outline',
-    },
-  ];
-
+  menuItems = sidebarMenuItems;
   logoutSubscription: Subscription;
 
   constructor(
