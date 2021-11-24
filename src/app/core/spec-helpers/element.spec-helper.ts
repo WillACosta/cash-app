@@ -5,8 +5,8 @@ import { By } from '@angular/platform-browser';
 export function findComponent<T>(
   fixture: ComponentFixture<T>,
   componentSelector: string
-): DebugElement[] {
-  return fixture.debugElement.queryAll(By.css(componentSelector));
+): DebugElement {
+  return fixture.debugElement.query(By.css(componentSelector));
 }
 
 export function findElementByCss<T>(

@@ -29,6 +29,12 @@ describe('SidebarComponent', () => {
   });
 
   it('should renders the menu items', () => {
-    expect(fixture.nativeElement.querySelectorAll('[data-test="menu"]').length).toBe(3);
+    expect(
+      fixture.nativeElement.querySelectorAll('[data-test="menu"]').length
+    ).toBe(3);
+  });
+
+  it('should render theme switcher button', () => {
+    expect(findComponent(fixture, 'app-theme-switcher')).toBeTruthy();
   });
 });

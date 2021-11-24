@@ -14,6 +14,12 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 
+import {
+  ngxsModuleConfig,
+  ngxsStoragePluginConfig,
+  toastrModuleConfig,
+} from './core/app.module.configurations';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -21,20 +27,11 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ToastrModule.forRoot({
-      positionClass: 'toast-top-right',
-      preventDuplicates: true,
-      closeButton: true,
-      progressBar: true,
-    }),
-    NgxsModule.forRoot([AuthState], {
-      developmentMode: true,
-    }),
+    ToastrModule.forRoot(toastrModuleConfig),
+    NgxsModule.forRoot([AuthState], ngxsModuleConfig),
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsStoragePluginModule.forRoot({
-      key: 'auth.token',
-    }),
+    NgxsStoragePluginModule.forRoot(ngxsStoragePluginConfig),
   ],
   providers: [],
   bootstrap: [AppComponent],
