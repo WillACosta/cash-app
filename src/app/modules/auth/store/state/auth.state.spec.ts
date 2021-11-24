@@ -2,25 +2,12 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { NgxsModule, Store } from '@ngxs/store';
-import { Observable, of } from 'rxjs';
+
+import { AuthServiceMock } from 'src/app/core/spec/mocks';
 import { AuthService } from 'src/app/services/auth.service';
-import { Login } from '../actions/auth.actions';
 
+import { Login, Logout } from '../actions/auth.actions';
 import { AuthState } from './auth.state';
-
-class AuthServiceMock {
-  login(): Observable<any> {
-    return of({
-      token: 'fake-token',
-    });
-  }
-}
-
-export const SOME_DESIRED_STATE = {
-  auth: {
-    token: 'fake-token',
-  },
-};
 
 describe('AuthState', () => {
   let store: Store;
@@ -83,5 +70,19 @@ describe('AuthState', () => {
 
     const state = store.selectSnapshot((state) => state.auth.token);
     expect(state).toBeTruthy();
+  });
+
+  it('should dispatch logout action and clear user token', () => {
+    store.reset({
+      ...store.snapshot(),
+      auth: {
+        token: 'fake-token',
+      },
+    });
+
+    store.dispatch(new Logout());
+
+    const state = store.selectSnapshot((state) => state.auth.token);
+    expect(state).toBe(null);
   });
 });

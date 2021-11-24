@@ -5,7 +5,7 @@ import { tap } from 'rxjs';
 import { Account } from 'src/app/models/account.model';
 import { AuthService } from 'src/app/services/auth.service';
 
-import { Login } from '../actions/auth.actions';
+import { Login, Logout } from '../actions/auth.actions';
 
 @State<Account>({
   name: 'auth',
@@ -36,5 +36,12 @@ export class AuthState {
         });
       })
     );
+  }
+
+  @Action(Logout)
+  logout({ setState }: StateContext<Account>) {
+    setState({
+      token: null,
+    });
   }
 }

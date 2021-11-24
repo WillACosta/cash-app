@@ -1,0 +1,56 @@
+@import "../../../../styles/rem-calc";
+
+.margin-icon {
+  margin-right: rem-calc(8);
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  justify-items: flex-start;
+  flex: 1;
+
+  height: 100vh;
+  padding: rem-calc(32 0);
+
+  ul {
+    padding: 0;
+
+    li {
+      list-style: none;
+      padding: rem-calc(12 0);
+
+      > a {
+        display: flex;
+        align-items: center;
+      }
+
+      mat-icon {
+        @extend .margin-icon;
+      }
+
+      &:hover {
+        cursor: pointer;
+
+        mat-icon,
+        span {
+          color: var(--primary);
+        }
+      }
+    }
+
+    mat-icon,
+    span {
+      color: var(--textVariant);
+    }
+  }
+
+  button {
+    color: var(--textVariant);
+
+    mat-icon {
+      @extend .margin-icon;
+    }
+  }
+}

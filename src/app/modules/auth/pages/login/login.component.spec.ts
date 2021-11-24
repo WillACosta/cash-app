@@ -22,15 +22,8 @@ import { LoginComponent } from './login.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { findComponent } from 'src/app/core/spec-helpers/element.spec-helper';
-
-class MockAuthService {
-  login(): Observable<any> {
-    return of({});
-  }
-}
-
-const fakeRoutes: Routes = [{ path: '', component: LoginComponent }];
+import { findComponent } from 'src/app/core/spec/spec-helper';
+import { AuthServiceMock, fakeRoutes } from 'src/app/core/spec/mocks';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -56,7 +49,7 @@ describe('LoginComponent', () => {
         RouterTestingModule.withRoutes(fakeRoutes),
         HttpClientTestingModule,
       ],
-      providers: [{ provide: AuthService, useClass: MockAuthService }],
+      providers: [{ provide: AuthService, useClass: AuthServiceMock }],
     }).compileComponents();
   });
 
