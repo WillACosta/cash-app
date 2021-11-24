@@ -7,17 +7,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { FormFieldComponent } from './atoms/form-field/form-field.component';
-import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { LogoComponent } from './atoms/logo/logo.component';
 import { LoadingButtonComponent } from './atoms/loading-button/loading-button.component';
+import { ThemeSwitcherComponent } from './atoms/theme-swicther/theme-switcher.component';
+
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
-    FormFieldComponent,
     LogoComponent,
     SidebarComponent,
     LoadingButtonComponent,
+    ThemeSwitcherComponent,
   ],
   imports: [
     CommonModule,
@@ -28,10 +29,10 @@ import { LoadingButtonComponent } from './atoms/loading-button/loading-button.co
     MatButtonModule,
   ],
   exports: [
-    FormFieldComponent,
     LogoComponent,
     LoadingButtonComponent,
     SidebarComponent,
+    ThemeSwitcherComponent,
   ],
 })
 export class ComponentsModule {}

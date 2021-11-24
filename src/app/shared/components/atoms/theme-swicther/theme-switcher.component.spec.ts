@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThemeSwictherComponent } from './theme-swicther.component';
+import { ThemeSwitcherComponent } from './theme-switcher.component';
 
-describe('ThemeSwictherComponent', () => {
-  let component: ThemeSwictherComponent;
-  let fixture: ComponentFixture<ThemeSwictherComponent>;
+describe('ThemeSwitcherComponent', () => {
+  let component: ThemeSwitcherComponent;
+  let fixture: ComponentFixture<ThemeSwitcherComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ThemeSwictherComponent],
+      declarations: [ThemeSwitcherComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ThemeSwictherComponent);
+    fixture = TestBed.createComponent(ThemeSwitcherComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
