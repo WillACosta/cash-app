@@ -18,3 +18,6 @@ export const sidebarMenuItems = [
     icon: 'settings_outline',
   },
 ];
+
+export const transactionsBaseUrl = 'http://localhost:3000';
+export const reqresBaseUrl = 'https://reqres.in/api';
