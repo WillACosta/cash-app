@@ -10,7 +10,7 @@ import {
 } from '@ngxs/store';
 
 import { ToastrService } from 'ngx-toastr';
-import { Subscription, tap } from 'rxjs';
+import { Subject, Subscription, takeUntil, tap } from 'rxjs';
 
 import { Login } from '../../store/actions/auth.actions';
 
@@ -29,6 +29,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   loginSuccessSubscription!: Subscription;
   loginErrorSubscription!: Subscription;
+
+  unsubscriber$ = new Subject<void>();
 
   email?: string;
   password?: string;
@@ -55,19 +57,21 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loginSuccessSubscription = this.actions
+    this.actions
       .pipe(
         ofActionSuccessful(Login),
-        tap(() => (this.pageState = PageState.loaded))
+        tap(() => (this.pageState = PageState.loaded)),
+        takeUntil(this.unsubscriber$)
       )
       .subscribe(() => {
         this.router.navigate(['']);
       });
 
-    this.loginErrorSubscription = this.actions
+    this.actions
       .pipe(
         ofActionErrored(Login),
-        tap(() => (this.pageState = PageState.loaded))
+        tap(() => (this.pageState = PageState.loaded)),
+        takeUntil(this.unsubscriber$)
       )
       .subscribe(() => {
         this.toastr.warning(
@@ -78,10 +82,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.loginSuccessSubscription)
-      this.loginSuccessSubscription.unsubscribe();
-
-    if (this.loginErrorSubscription) this.loginErrorSubscription.unsubscribe();
+    this.unsubscriber$.next();
+    this.unsubscriber$.complete();
   }
 
   login() {
