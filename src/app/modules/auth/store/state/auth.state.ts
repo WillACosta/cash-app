@@ -23,7 +23,7 @@ export class AuthState {
   }
 
   @Selector()
-  static isAuthenticated(state: Account) {
+  static isAuthenticated(state: Account): boolean {
     return !!state.token;
   }
 

@@ -1,28 +1,29 @@
 {
-  "transactions": [
-    {
-      "id": "1",
-      "amount": "150",
+  "transactions": [{
+      "id": 1,
+      "amount": 150,
       "currency": "BRL",
       "date": "2018-01-01",
-      "source": "expanse",
-      "isPayed": "true",
+      "type": "expanse",
+      "isPayed": true,
       "description": "Pagamento de conta de energia"
     },
     {
-      "id": "2",
-      "amount": "1260",
+      "id": 2,
+      "amount": 1260,
       "currency": "BRL",
       "date": "2018-01-01",
-      "source": "incoming",
+      "type": "incoming",
+      "isPayed": null,
       "description": "Salário do mês"
     },
     {
-      "id": "3",
-      "amount": "20",
+      "id": 3,
+      "amount": 20,
       "currency": "BRL",
       "date": "2018-01-01",
-      "source": "incoming",
+      "type": "incoming",
+      "isPayed": null,
       "description": "Recebimento de empréstimo"
     }
   ]

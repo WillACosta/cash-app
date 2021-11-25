@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs';
 
@@ -26,11 +27,22 @@ export class MainState {
     return state.transactions;
   }
 
+  @Selector()
+  static incomingTransactions(state: MainStateModel) {
+    return state.transactions.filter(
+      (transaction) => transaction.type === 'incoming'
+    );
+  }
+
   @Action(GetTransactions)
   getTransactions({ patchState }: StateContext<MainStateModel>) {
     return this.transactionsService.getTransactions().pipe(
       tap((transactions) => {
-        patchState({ transactions });
+        const deserializableData = transactions.map((t) => {
+          return new Transaction().deserialize(t);
+        });
+
+        patchState({ transactions: deserializableData });
       })
     );
   }
