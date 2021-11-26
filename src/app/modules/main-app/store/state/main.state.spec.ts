@@ -53,28 +53,28 @@ describe('MainState', () => {
     expect(store.selectSnapshot(MainState)).toEqual(fakeMainStateData);
   });
 
-  // it('should select transactions', (done) => {
-  //   store.dispatch(new GetTransactions());
+  it('should select transactions', (done) => {
+    store.dispatch(new GetTransactions());
 
-  //   store
-  //     .select(MainState.transactions)
-  //     .subscribe((transactions: Transaction[]) => {
-  //       expect(transactions).toEqual(fakeTransactionsData);
-  //       done();
-  //     });
-  // });
+    store
+      .select(MainState.transactions)
+      .subscribe((transactions: Transaction[]) => {
+        expect(transactions).toEqual(fakeTransactionsData);
+        done();
+      });
+  });
 
-  // it('should select `incoming` transactions', (done) => {
-  //   store.dispatch(new GetTransactions());
+  it('should select `incoming` transactions', (done) => {
+    store.dispatch(new GetTransactions());
 
-  //   store
-  //     .select(MainState.incomingTransactions)
-  //     .subscribe((transactions: Transaction[]) => {
-  //       expect(transactions).toEqual(
-  //         fakeTransactionsData.filter((t) => t.type === 'incoming')
-  //       );
+    store
+      .select(MainState.incomingTransactions)
+      .subscribe((transactions: Transaction[]) => {
+        expect(transactions).toEqual(
+          fakeTransactionsData.filter((t) => t.type === 'incoming')
+        );
 
-  //       done();
-  //     });
-  // });
+        done();
+      });
+  });
 });

@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 
-import { Transaction } from 'src/app/models/transaction.model';
-import { LoginComponent } from 'src/app/modules/auth/pages/login/login.component';
+import { Transaction } from '../../models/transaction.model';
+import { LoginComponent } from '../../modules/auth/pages/login/login.component';
 
 export class AuthServiceMock {
   login(): Observable<any> {
@@ -33,7 +33,13 @@ export class TransactionsServiceMock {
         currency: 'BRL',
         isPayed: null,
       },
-    ]);
+    ]).pipe(
+      map((transactions) => {
+        return transactions.map((t) => {
+          return new Transaction().deserialize(t);
+        });
+      })
+    );
   }
 }
 
@@ -44,7 +50,7 @@ export const fakeRoutes: Routes = [
 
 export const fakeMainStateData = {
   transactions: [
-    {
+    new Transaction().deserialize({
       id: 1,
       date: '2021-01-01',
       amount: 100,
@@ -52,8 +58,8 @@ export const fakeMainStateData = {
       type: 'expanse',
       currency: 'BRL',
       isPayed: false,
-    },
-    {
+    }),
+    new Transaction().deserialize({
       id: 2,
       date: '2021-01-01',
       amount: 200,
@@ -61,12 +67,12 @@ export const fakeMainStateData = {
       type: 'incoming',
       currency: 'BRL',
       isPayed: null,
-    },
+    }),
   ],
 };
 
 export const fakeTransactionsData = [
-  {
+  new Transaction().deserialize({
     id: 1,
     date: '2021-01-01',
     amount: 100,
@@ -74,8 +80,8 @@ export const fakeTransactionsData = [
     type: 'expanse',
     currency: 'BRL',
     isPayed: false,
-  },
-  {
+  }),
+  new Transaction().deserialize({
     id: 2,
     date: '2021-01-01',
     amount: 200,
@@ -83,5 +89,5 @@ export const fakeTransactionsData = [
     type: 'incoming',
     currency: 'BRL',
     isPayed: null,
-  },
+  }),
 ];
