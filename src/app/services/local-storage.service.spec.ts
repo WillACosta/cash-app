@@ -10,18 +10,18 @@ describe('LocalStorageService', () => {
     service = TestBed.inject(LocalStorageService);
   });
 
-  it('should be created', () => {
+  test('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should be able to get and set an item', () => {
+  test('should be able to get and set an item', () => {
     const value = 'test-item';
 
     service.setItem(value);
     expect(service.getItem()).toEqual(value);
   });
 
-  it('should be able to remove a item', () => {
+  test('should be able to remove a item', () => {
     service.removeItem();
 
     expect(service.getItem()).toBe('');

@@ -5,7 +5,6 @@ import { NgxsModule, Store } from '@ngxs/store';
 import {
   fakeMainStateData,
   fakeTransactionsData,
-  TransactionsServiceMock,
 } from 'src/app/core/spec/mocks';
 
 import { Transaction } from 'src/app/models/transaction.model';
@@ -20,40 +19,35 @@ describe('MainState', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NgxsModule.forRoot([MainState])],
-      providers: [
-        {
-          provide: TransactionsService,
-          useClass: TransactionsServiceMock,
-        },
-      ],
+      providers: [TransactionsService],
     });
 
     store = TestBed.inject(Store);
   });
 
-  it('should be created', () => {
+  test('should be created', () => {
     expect(store).toBeTruthy();
   });
 
-  it('should return the default state', () => {
+  test('should return the default state', () => {
     expect(store.selectSnapshot(MainState)).toEqual({
       transactions: [],
     });
   });
 
-  it('should dispatch `GetTransactions` Action', () => {
+  test('should dispatch `GetTransactions` Action', () => {
     spyOn(store, 'dispatch');
 
     store.dispatch(new GetTransactions());
     expect(store.dispatch).toHaveBeenCalledWith(new GetTransactions());
   });
 
-  it('should return the state with transactions', () => {
+  test('should return the state with transactions', () => {
     store.dispatch(new GetTransactions());
     expect(store.selectSnapshot(MainState)).toEqual(fakeMainStateData);
   });
 
-  it('should select transactions', (done) => {
+  test('should select transactions', (done) => {
     store.dispatch(new GetTransactions());
 
     store
@@ -64,7 +58,7 @@ describe('MainState', () => {
       });
   });
 
-  it('should select `incoming` transactions', (done) => {
+  test('should select `incoming` transactions', (done) => {
     store.dispatch(new GetTransactions());
 
     store

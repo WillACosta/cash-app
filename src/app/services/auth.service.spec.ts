@@ -50,12 +50,14 @@ describe('AuthService', () => {
   });
 
   it('should request to login and return error', () => {
-    spyOn(httpClient, 'post').and.returnValue(
-      throwError(() => new Error('Failure'))
+    jest.spyOn(httpClient, 'post').mockReturnValue(
+      throwError(() => {
+        throw new Error('error');
+      })
     );
 
     service.login('', '').subscribe((response) => {
-      expect(response).toBeUndefined();
+      expect(response).toBeInstanceOf(Error);
     });
   });
 });

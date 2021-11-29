@@ -14,8 +14,3 @@ export class Transaction implements Deserializable {
     return this;
   }
 }
-
-enum sourceType {
-  expanse,
-  income,
-}

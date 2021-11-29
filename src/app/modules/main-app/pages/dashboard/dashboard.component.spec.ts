@@ -8,7 +8,7 @@ import { TransactionsService } from 'src/app/services/transactions.service';
 import { MainState } from '../../store/state/main.state';
 import { DashboardComponent } from './dashboard.component';
 
-describe('DashboardComponent', () => {
+xdescribe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
   let store: Store;
