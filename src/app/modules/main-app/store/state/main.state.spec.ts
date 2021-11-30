@@ -77,4 +77,18 @@ describe('MainState', () => {
         done();
       });
   });
+
+  it('should select `expense` transactions', (done) => {
+    store.dispatch(new GetTransactions());
+
+    store
+      .select(MainState.expenseTransactions)
+      .subscribe((transactions: Transaction[]) => {
+        expect(transactions).toEqual(
+          fakeTransactionsData.filter((t) => t.type === 'expense')
+        );
+
+        done();
+      });
+  });
 });

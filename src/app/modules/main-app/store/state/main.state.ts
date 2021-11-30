@@ -29,9 +29,12 @@ export class MainState {
 
   @Selector()
   static incomingTransactions(state: MainStateModel) {
-    return state.transactions.filter(
-      (transaction) => transaction.type === 'incoming'
-    );
+    return this.getFilteredTransactions(state.transactions, 'incoming');
+  }
+
+  @Selector()
+  static expenseTransactions(state: MainStateModel) {
+    return this.getFilteredTransactions(state.transactions, 'expense');
   }
 
   @Action(GetTransactions)
@@ -45,5 +48,14 @@ export class MainState {
         patchState({ transactions: deserializableData });
       })
     );
+  }
+
+  private static getFilteredTransactions(
+    transactions: Transaction[],
+    filterBy: string
+  ): Transaction[] {
+    return transactions.filter((transaction) => {
+      return transaction.type === filterBy;
+    });
   }
 }

@@ -4,7 +4,7 @@
       "amount": 150,
       "currency": "BRL",
       "date": "2018-01-01",
-      "type": "expanse",
+      "type": "expense",
       "isPayed": true,
       "description": "Pagamento de conta de energia"
     },

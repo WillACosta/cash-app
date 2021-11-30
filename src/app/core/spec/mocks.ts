@@ -20,7 +20,7 @@ export class TransactionsServiceMock {
         date: '2021-01-01',
         amount: 100,
         description: 'Description',
-        type: 'expanse',
+        type: 'expense',
         currency: 'BRL',
         isPayed: false,
       },
@@ -55,7 +55,7 @@ export const fakeMainStateData = {
       date: '2021-01-01',
       amount: 100,
       description: 'Description',
-      type: 'expanse',
+      type: 'expense',
       currency: 'BRL',
       isPayed: false,
     }),
@@ -77,10 +77,22 @@ export const fakeTransactionsData = [
     date: '2021-01-01',
     amount: 100,
     description: 'Description',
-    type: 'expanse',
+    type: 'expense',
     currency: 'BRL',
     isPayed: false,
   }),
+  new Transaction().deserialize({
+    id: 2,
+    date: '2021-01-01',
+    amount: 200,
+    description: 'Description',
+    type: 'incoming',
+    currency: 'BRL',
+    isPayed: null,
+  }),
+];
+
+export const fakeIncomingData = [
   new Transaction().deserialize({
     id: 2,
     date: '2021-01-01',

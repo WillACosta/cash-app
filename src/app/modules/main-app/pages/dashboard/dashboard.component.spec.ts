@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgxsModule, Store } from '@ngxs/store';
+import { NgxsModule } from '@ngxs/store';
 
 import { TransactionsServiceMock } from 'src/app/core/spec/mocks';
 import { TransactionsService } from 'src/app/services/transactions.service';
@@ -11,13 +11,17 @@ import { DashboardComponent } from './dashboard.component';
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
-  let store: Store;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DashboardComponent],
       imports: [NgxsModule.forRoot([MainState]), HttpClientTestingModule],
-      providers: [{ TransactionsService, useClass: TransactionsServiceMock }],
+      providers: [
+        {
+          provide: TransactionsService,
+          useClass: TransactionsServiceMock,
+        },
+      ],
     }).compileComponents();
   });
 
@@ -25,18 +29,25 @@ describe('DashboardComponent', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
-    store = TestBed.inject(Store);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render the resum items', () => {
-    const resumItems =
-      fixture.debugElement.nativeElement.querySelectorAll('.resum-item');
+  it('should sum incoming transactions and `totalIncomingAmount` to be 200 ', (done) => {
+    component.incomingTransactions$.subscribe((transactions) => {
+      expect(transactions.length).toBe(1);
+      expect(component.totalIncomingAmount).toBe(200);
+      done();
+    });
+  });
 
-    expect(resumItems.length).toBe(3);
+  it('should sum expense transactions and `totalExpenseAmount` to be 100 ', (done) => {
+    component.expenseTransactions$.subscribe((transactions) => {
+      expect(transactions.length).toBe(1);
+      expect(component.totalExpenseAmount).toBe(100);
+      done();
+    });
   });
 });
