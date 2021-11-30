@@ -6,16 +6,21 @@ import { tap } from 'rxjs';
 import { TransactionsService } from 'src/app/services/transactions.service';
 
 import { Transaction } from '../../../../models/transaction.model';
-import { GetTransactions } from '../actions/main.actions';
+import {
+  GetAllTransactions,
+  GetPaginatedTransactions,
+} from '../actions/main.actions';
 
 class MainStateModel {
-  transactions: Transaction[];
+  allTransactions: Transaction[];
+  paginatedTransactions: Transaction[];
 }
 
 @State<MainStateModel>({
   name: 'main',
   defaults: {
-    transactions: [],
+    allTransactions: [],
+    paginatedTransactions: [],
   },
 })
 @Injectable()
@@ -23,31 +28,69 @@ export class MainState {
   constructor(private transactionsService: TransactionsService) {}
 
   @Selector()
-  static transactions(state: MainStateModel) {
-    return state.transactions;
+  static allTransactions(state: MainStateModel): Transaction[] {
+    return state.allTransactions;
   }
 
   @Selector()
-  static incomingTransactions(state: MainStateModel) {
-    return this.getFilteredTransactions(state.transactions, 'incoming');
+  static paginatedTransactions(state: MainStateModel): Transaction[] {
+    return state.paginatedTransactions;
   }
 
   @Selector()
-  static expenseTransactions(state: MainStateModel) {
-    return this.getFilteredTransactions(state.transactions, 'expense');
+  static incomingTransactions(state: MainStateModel): Transaction[] {
+    return this.getFilteredTransactions(state.allTransactions, 'incoming');
   }
 
-  @Action(GetTransactions)
-  getTransactions({ patchState }: StateContext<MainStateModel>) {
-    return this.transactionsService.getTransactions().pipe(
-      tap((transactions) => {
-        const deserializableData = transactions.map((t) => {
-          return new Transaction().deserialize(t);
-        });
+  @Selector()
+  static expenseTransactions(state: MainStateModel): Transaction[] {
+    return this.getFilteredTransactions(state.allTransactions, 'expense');
+  }
 
-        patchState({ transactions: deserializableData });
-      })
-    );
+  @Action(GetAllTransactions)
+  getAllTransactions(context: StateContext<MainStateModel>) {
+    return this.transactionsService
+      .getAllTransactions()
+      .pipe(
+        tap((transactions) =>
+          this.patchTransactionState(context, transactions, 'allTransactions')
+        )
+      );
+  }
+
+  @Action(GetPaginatedTransactions)
+  getPaginatedTransactions(
+    context: StateContext<MainStateModel>,
+    { payload }: GetPaginatedTransactions
+  ) {
+    return this.transactionsService
+      .getPaginatedTransactions(
+        payload.page,
+        payload.limit,
+        payload.sortBy,
+        payload.sortOrder
+      )
+      .pipe(
+        tap((transactions) =>
+          this.patchTransactionState(
+            context,
+            transactions,
+            'paginatedTransactions'
+          )
+        )
+      );
+  }
+
+  private patchTransactionState(
+    context: StateContext<MainStateModel>,
+    transactions: Transaction[],
+    stateName: string
+  ) {
+    const deserializableData = transactions.map((t) => {
+      return new Transaction().deserialize(t);
+    });
+
+    context.patchState({ [stateName]: deserializableData });
   }
 
   private static getFilteredTransactions(

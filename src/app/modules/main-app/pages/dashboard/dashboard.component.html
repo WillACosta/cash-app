@@ -11,18 +11,32 @@
         <div class="transaction-resum-container mt-4">
           <div class="resum-item">
             <span>Entradas</span>
-            <strong>{{ totalIncomingAmount | currency: "BRL":true:"1.2-2" }}</strong>
+            <strong>{{
+              totalIncomingAmount | currency: "BRL":true:"1.2-2"
+            }}</strong>
           </div>
 
           <div class="resum-item">
             <span>Saídas</span>
-            <strong>{{ totalExpenseAmount | currency: "BRL":true:"1.2-2" }}</strong>
+            <strong>{{
+              totalExpenseAmount | currency: "BRL":true:"1.2-2"
+            }}</strong>
           </div>
 
           <div class="resum-item">
             <span>Diferença</span>
-            <strong>{{ differenceAmount | currency: "BRL":true:"1.2-2" }}</strong>
+            <strong>{{
+              differenceAmount | currency: "BRL":true:"1.2-2"
+            }}</strong>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="table-container mt-5">
+          <app-c-table [tableData]="transactions$ | async"></app-c-table>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ import { combineLatest, Observable, Subscription } from 'rxjs';
 
 import { Transaction } from 'src/app/models/transaction.model';
 import { MainState } from 'src/app/modules/main-app/store/state/main.state';
-import { GetTransactions } from '../../store/actions/main.actions';
+import { GetAllTransactions } from '../../store/actions/main.actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +13,7 @@ import { GetTransactions } from '../../store/actions/main.actions';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  @Select(MainState.transactions)
+  @Select(MainState.allTransactions)
   transactions$: Observable<Transaction[]>;
 
   @Select(MainState.incomingTransactions)
@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new GetTransactions());
+    this.store.dispatch(new GetAllTransactions());
     this.setListeners();
   }
 

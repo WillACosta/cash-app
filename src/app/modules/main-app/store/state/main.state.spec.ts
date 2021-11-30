@@ -10,7 +10,7 @@ import {
 
 import { Transaction } from 'src/app/models/transaction.model';
 import { TransactionsService } from 'src/app/services/transactions.service';
-import { GetTransactions } from '../actions/main.actions';
+import { GetAllTransactions } from '../actions/main.actions';
 
 import { MainState } from './main.state';
 
@@ -41,20 +41,20 @@ describe('MainState', () => {
     });
   });
 
-  it('should dispatch `GetTransactions` Action', () => {
+  it('should dispatch `GetAllTransactions` Action', () => {
     spyOn(store, 'dispatch');
 
-    store.dispatch(new GetTransactions());
-    expect(store.dispatch).toHaveBeenCalledWith(new GetTransactions());
+    store.dispatch(new GetAllTransactions());
+    expect(store.dispatch).toHaveBeenCalledWith(new GetAllTransactions());
   });
 
   it('should return the state with transactions', () => {
-    store.dispatch(new GetTransactions());
+    store.dispatch(new GetAllTransactions());
     expect(store.selectSnapshot(MainState)).toEqual(fakeMainStateData);
   });
 
   it('should select transactions', (done) => {
-    store.dispatch(new GetTransactions());
+    store.dispatch(new GetAllTransactions());
 
     store
       .select(MainState.transactions)
@@ -65,7 +65,7 @@ describe('MainState', () => {
   });
 
   it('should select `incoming` transactions', (done) => {
-    store.dispatch(new GetTransactions());
+    store.dispatch(new GetAllTransactions());
 
     store
       .select(MainState.incomingTransactions)
@@ -79,7 +79,7 @@ describe('MainState', () => {
   });
 
   it('should select `expense` transactions', (done) => {
-    store.dispatch(new GetTransactions());
+    store.dispatch(new GetAllTransactions());
 
     store
       .select(MainState.expenseTransactions)

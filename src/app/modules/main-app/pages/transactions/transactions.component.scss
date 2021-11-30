@@ -1,0 +1,18 @@
+@import "../../../../styles/rem-calc";
+
+main {
+  height: 100vh;
+  padding: rem-calc(32 0);
+
+  h1 {
+    color: var(--textVariant);
+  }
+
+  .table-container {
+    background-color: var(--surface);
+    border-radius: rem-calc(15);
+
+    height: 100%;
+    padding: rem-calc(40 25);
+  }
+}
