@@ -48,23 +48,25 @@ describe('MainState', () => {
     expect(store.dispatch).toHaveBeenCalledWith(new GetAllTransactions());
   });
 
-  it('should return the state with transactions', () => {
+  it('should return the state with `allTransactions`', () => {
     store.dispatch(new GetAllTransactions());
-    expect(store.selectSnapshot(MainState)).toEqual(fakeMainStateData);
+    expect(store.selectSnapshot(MainState.allTransactions)).toEqual(
+      fakeTransactionsData
+    );
   });
 
-  it('should select transactions', (done) => {
+  it('should select `allTransactions`', (done) => {
     store.dispatch(new GetAllTransactions());
 
     store
-      .select(MainState.transactions)
+      .select(MainState.allTransactions)
       .subscribe((transactions: Transaction[]) => {
         expect(transactions).toEqual(fakeTransactionsData);
         done();
       });
   });
 
-  it('should select `incoming` transactions', (done) => {
+  it('should select `incoming` of `allTransactions`', (done) => {
     store.dispatch(new GetAllTransactions());
 
     store

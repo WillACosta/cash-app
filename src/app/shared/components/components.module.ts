@@ -17,6 +17,7 @@ import { ThemeSwitcherComponent } from './atoms/theme-swicther/theme-switcher.co
 
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { CTableComponent } from './molecules/c-table/c-table.component';
+import { ButtonComponent } from './atoms/button/button.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CTableComponent } from './molecules/c-table/c-table.component';
     LoadingButtonComponent,
     ThemeSwitcherComponent,
     CTableComponent,
+    ButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { CTableComponent } from './molecules/c-table/c-table.component';
     SidebarComponent,
     ThemeSwitcherComponent,
     CTableComponent,
+    ButtonComponent,
   ],
 })
 export class ComponentsModule {}

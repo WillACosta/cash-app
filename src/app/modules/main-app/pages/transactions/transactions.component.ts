@@ -17,4 +17,8 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {}
 
   ngOnInit(): void {}
+
+  openNewTransactionDialog() {
+    alert('Open Dialog');
+  }
 }

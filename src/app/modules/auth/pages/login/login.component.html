@@ -10,8 +10,9 @@
       <div class="illustration-container">
         <img
           src="assets/payment.svg"
-          alt="Ilustração de um homem de pele escura segurando um cartão de crédito na cor verde"
-        />
+          alt="Ilustração de um homem de pele escura segurando um cartão de
+          crédito na cor verde"
+          />
       </div>
     </div>
 
@@ -33,7 +34,7 @@
               placeholder="exemplo@email.com"
               name="email"
               formControlName="email"
-            />
+              />
             <mat-icon matPrefix>mail_outline</mat-icon>
           </mat-form-field>
 
@@ -45,28 +46,26 @@
               placeholder="Digite sua senha"
               name="password"
               formControlName="password"
-            />
+              />
 
             <mat-icon matPrefix>lock_outline</mat-icon>
-            <button mat-icon-button matSuffix (click)="togleInputVisibility()" type="button">
+            <button mat-icon-button matSuffix (click)="togleInputVisibility()"
+              type="button">
               <mat-icon>{{
                 hideText ? "visibility_off" : "visibility"
-              }}</mat-icon>
+                }}</mat-icon>
             </button>
           </mat-form-field>
 
           <app-loading-button *ngIf="pageState == PageStateType.loading">
           </app-loading-button>
 
-          <button
-            mat-flat-button
-            color="primary"
-            type="submit"
-            [disabled]="loginForm.invalid"
+          <app-button
             *ngIf="pageState != PageStateType.loading"
-          >
-            Entrar
-          </button>
+            label="Entrar"
+            (onClickedEvent)="login()"
+            [disabled]="loginForm.invalid">
+          </app-button>
         </form>
       </main>
     </div>

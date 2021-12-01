@@ -8,11 +8,10 @@
 
     <div class="row mt-5">
       <div class="col-12 d-flex justify-content-end">
-        <button
-          mat-flat-button
-          color="primary">
-          Nova Transação
-        </button>
+        <app-button
+          (onClickedEvent)="openNewTransactionDialog()"
+          label="Nova Transação">
+        </app-button>
       </div>
     </div>
 
