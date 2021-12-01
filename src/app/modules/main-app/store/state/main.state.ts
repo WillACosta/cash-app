@@ -5,7 +5,11 @@ import { tap } from 'rxjs';
 
 import { TransactionsService } from 'src/app/services/transactions.service';
 
-import { Transaction } from '../../../../models/transaction.model';
+import {
+  PaginatedTransactions,
+  Transaction,
+} from '../../../../models/transaction.model';
+
 import {
   GetAllTransactions,
   GetPaginatedTransactions,
@@ -13,14 +17,17 @@ import {
 
 class MainStateModel {
   allTransactions: Transaction[];
-  paginatedTransactions: Transaction[];
+  paginatedTransactions: PaginatedTransactions;
 }
 
 @State<MainStateModel>({
   name: 'main',
   defaults: {
     allTransactions: [],
-    paginatedTransactions: [],
+    paginatedTransactions: {
+      transactions: [],
+      resultsLength: 0,
+    },
   },
 })
 @Injectable()
@@ -33,7 +40,7 @@ export class MainState {
   }
 
   @Selector()
-  static paginatedTransactions(state: MainStateModel): Transaction[] {
+  static paginatedTransactions(state: MainStateModel): PaginatedTransactions {
     return state.paginatedTransactions;
   }
 
@@ -60,7 +67,7 @@ export class MainState {
 
   @Action(GetPaginatedTransactions)
   getPaginatedTransactions(
-    context: StateContext<MainStateModel>,
+    { patchState }: StateContext<MainStateModel>,
     { payload }: GetPaginatedTransactions
   ) {
     return this.transactionsService
@@ -71,12 +78,13 @@ export class MainState {
         payload.sortOrder
       )
       .pipe(
-        tap((transactions) =>
-          this.patchTransactionState(
-            context,
-            transactions,
-            'paginatedTransactions'
-          )
+        tap((response) =>
+          patchState({
+            paginatedTransactions: {
+              transactions: response.body ?? [],
+              resultsLength: Number(response.headers.get('X-Total-Count') ?? 0),
+            },
+          })
         )
       );
   }

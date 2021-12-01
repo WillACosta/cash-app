@@ -15,7 +15,7 @@ export class Transaction implements Deserializable {
   }
 }
 
-enum sourceType {
-  expanse,
-  income,
+export interface PaginatedTransactions {
+  transactions: Transaction[];
+  resultsLength: number;
 }

@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 import { LogoComponent } from './atoms/logo/logo.component';
@@ -35,6 +36,7 @@ import { CTableComponent } from './molecules/c-table/c-table.component';
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
   ],
   exports: [
     LogoComponent,
