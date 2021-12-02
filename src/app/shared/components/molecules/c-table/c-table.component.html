@@ -1,0 +1,60 @@
+<mat-form-field appearance="standard">
+  <mat-label>Pesquisar</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Pesquise por
+    descrição..." #input />
+</mat-form-field>
+
+<div>
+  <table mat-table [dataSource]="dataSource" matSort matSortActive="date"
+    matSortDisableClear matSortDirection="desc">
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data</th>
+      <td mat-cell *matCellDef="let row">{{ row.date | date }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</th>
+      <td mat-cell *matCellDef="let row">{{ row.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Tipo da transação
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <div class="transaction-type">
+          <mat-icon>sell</mat-icon>
+          <span *ngIf="row.type === 'incoming'" class="text-success">
+            Entrada
+          </span>
+          <span *ngIf="row.type === 'expense'" class="text-danger">
+            Saída
+          </span>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.amount | currency: "BRL":true:"1.2-2" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef matSortDisabled>Ação</th>
+      <td mat-cell *matCellDef="let row"></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Oops! Sem resultados</td>
+    </tr>
+  </table>
+
+  <mat-paginator [length]="resultsLength" [pageSizeOptions]="[5, 10]"
+    aria-label="Seleciona uma página de resultados">
+  </mat-paginator>
+</div>

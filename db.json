@@ -4,7 +4,7 @@
       "amount": 150,
       "currency": "BRL",
       "date": "2018-01-01",
-      "type": "expanse",
+      "type": "expense",
       "isPayed": true,
       "description": "Pagamento de conta de energia"
     },
@@ -25,6 +25,78 @@
       "type": "incoming",
       "isPayed": null,
       "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 4,
+      "amount": 20,
+      "currency": "BRL",
+      "date": "2018-01-01",
+      "type": "incoming",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 5,
+      "amount": 20,
+      "currency": "BRL",
+      "date": "2018-01-01",
+      "type": "incoming",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 6,
+      "amount": 20,
+      "currency": "BRL",
+      "date": "2018-01-01",
+      "type": "incoming",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 7,
+      "amount": 20,
+      "currency": "BRL",
+      "date": "2018-01-01",
+      "type": "incoming",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 8,
+      "amount": 20,
+      "currency": "BRL",
+      "date": "2018-01-01",
+      "type": "incoming",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 9,
+      "amount": 20,
+      "currency": "BRL",
+      "date": "2018-01-01",
+      "type": "incoming",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 10,
+      "amount": 20,
+      "currency": "BRL",
+      "date": "2018-01-01",
+      "type": "incoming",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 11,
+      "amount": 36.21,
+      "currency": "BRL",
+      "date": "2021-01-12",
+      "type": "expense",
+      "isPayed": true,
+      "description": "Pagamento de empréstimo"
     }
   ]
 }

@@ -14,3 +14,8 @@ export class Transaction implements Deserializable {
     return this;
   }
 }
+
+export interface PaginatedTransactions {
+  transactions: Transaction[];
+  resultsLength: number;
+}

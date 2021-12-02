@@ -29,6 +29,10 @@ Url base: `http://localhost:3000`
 
 GET `/transactions?\_page=7&\_limit=20`
 
+#### Ordenação
+
+GET `/posts?_sort=views&_order=asc`
+
 #### Models
 
 ```javascript

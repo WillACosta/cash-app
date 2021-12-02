@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { MatButtonModule } from '@angular/material/button';
+
 import { NgxsModule } from '@ngxs/store';
 
 import { MainAppRoutingModule } from './main-app-routing.module';
@@ -22,6 +24,7 @@ import { MainState } from './store/state/main.state';
     CommonModule,
     MainAppRoutingModule,
     ComponentsModule,
+    MatButtonModule,
     NgxsModule.forFeature([MainState]),
   ],
 })

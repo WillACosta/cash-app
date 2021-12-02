@@ -1,1 +1,26 @@
-<p>transactions works!</p>
+<main>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <h1>Transações</h1>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-12 d-flex justify-content-end">
+        <app-button
+          (onClickedEvent)="openNewTransactionDialog()"
+          label="Nova Transação">
+        </app-button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="table-container mt-4">
+          <app-c-table></app-c-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
