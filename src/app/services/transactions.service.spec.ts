@@ -1,42 +1,50 @@
-import { TestBed } from '@angular/core/testing';
+import { TransactionsService } from './transactions.service';
+import { transactionsBaseUrl } from '../core/utils';
 
 import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+  fakeHttpClient,
+  fakeTransactionsData,
+  provider,
+} from '../core/spec/mocks';
 
-import { transactionsBaseUrl } from '../core/utils/constants';
-import { TransactionsService } from './transactions.service';
-import { Transaction } from '../models/transaction.model';
-import { fakeTransactionsData } from '../core/spec/mocks';
+import { of } from 'rxjs';
+
+const transactionsUrl = `${transactionsBaseUrl}/transactions`;
 
 describe('TransactionsService', () => {
   let service: TransactionsService;
-  let httpMock: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [TransactionsService],
-    });
-
-    service = TestBed.inject(TransactionsService);
-    httpMock = TestBed.inject(HttpTestingController);
+    service = new TransactionsService(provider(fakeHttpClient));
   });
 
   test('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  test('should return a list of Transactions', () => {
-    service.getTransactions().subscribe((transactions: Transaction[]) => {
-      expect(transactions.length).toBe(3);
+  test('should retrieve a list of all transactions', () => {
+    fakeHttpClient.get.mockImplementationOnce(() => of(fakeTransactionsData));
 
+    service.getAllTransactions().subscribe((transactions) => {
+      expect(fakeHttpClient).toBeCalledWith(transactionsUrl);
       expect(transactions).toEqual(fakeTransactionsData);
     });
+  });
 
-    const req = httpMock.expectOne(`${transactionsBaseUrl}/transactions`);
-    req.flush({});
-    httpMock.verify();
+  test('should retrieve a list of paginated transactions', () => {
+    fakeHttpClient.get.mockImplementationOnce(() => of(fakeTransactionsData));
+
+    service
+      .getPaginatedTransactions(1, 10, null, null)
+      .subscribe((transactions) => {
+        expect(fakeHttpClient).toBeCalledWith(transactionsUrl, {
+          params: {
+            _page: 1,
+            _limit: 10,
+          },
+        });
+
+        expect(transactions).toEqual(fakeTransactionsData);
+      });
   });
 });

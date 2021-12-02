@@ -1,13 +1,10 @@
-import { TestBed } from '@angular/core/testing';
-
 import { LocalStorageService } from './local-storage.service';
 
 describe('LocalStorageService', () => {
   let service: LocalStorageService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(LocalStorageService);
+    service = new LocalStorageService();
   });
 
   test('should be created', () => {
@@ -23,7 +20,6 @@ describe('LocalStorageService', () => {
 
   test('should be able to remove a item', () => {
     service.removeItem();
-
     expect(service.getItem()).toBe('');
   });
 });

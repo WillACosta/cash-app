@@ -51,23 +51,6 @@ xdescribe('SidebarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should renders a Cash App Logo', () => {
-    const logoComponent = fixture.nativeElement.querySelector('app-logo');
-    expect(logoComponent).toBeTruthy();
-  });
-
-  it('should renders the menu items', () => {
-    expect(
-      fixture.nativeElement.querySelectorAll('[data-test="menu"]').length
-    ).toBe(3);
-  });
-
-  it('should render exit button', () => {
-    expect(
-      fixture.nativeElement.querySelector('[data-test="exit-button"]')
-    ).toBeTruthy();
-  });
-
   it('should dispatch Logout Action', () => {
     spyOn(store, 'dispatch');
     store.dispatch(new Logout());

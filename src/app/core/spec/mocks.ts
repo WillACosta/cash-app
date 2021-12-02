@@ -103,3 +103,10 @@ export const fakeIncomingData = [
     isPayed: null,
   }),
 ];
+
+export const provider = (mock: any): any => mock;
+
+export const fakeHttpClient = {
+  get: jest.fn(),
+  post: jest.fn(),
+};
