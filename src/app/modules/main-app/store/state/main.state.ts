@@ -75,13 +75,9 @@ export class MainState {
 
   @Action(GetPaginatedTransactions)
   getPaginatedTransactions(
-    { patchState, getState }: StateContext<MainStateModel>,
+    { patchState }: StateContext<MainStateModel>,
     { payload }: GetPaginatedTransactions
   ) {
-    if (getState().paginatedTransactions.transactions.length > 0) {
-      return;
-    }
-
     return this.transactionsService
       .getPaginatedTransactions(
         payload.page,

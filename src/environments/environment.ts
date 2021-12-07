@@ -2,8 +2,14 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { transactionsBaseUrl, reqresBaseUrl } from '../app/core/utils';
+
 export const environment = {
-  production: false
+  production: false,
+  appApis: {
+    login: `${reqresBaseUrl}/login`,
+    transactions: `${transactionsBaseUrl}/transactions`,
+  },
 };
 
 /*

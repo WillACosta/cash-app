@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, retry, tap } from 'rxjs';
 
-import { transactionsBaseUrl } from '../core/utils/constants';
-import {
-  PaginatedTransactions,
-  Transaction,
-} from '../models/transaction.model';
+import { retry } from 'rxjs';
+
+import { environment } from '../../environments/environment';
+import { Transaction } from '../models/transaction.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +14,7 @@ export class TransactionsService {
 
   getAllTransactions() {
     return this.httpClient
-      .get<Transaction[]>(`${transactionsBaseUrl}/transactions`)
+      .get<Transaction[]>(environment.appApis.transactions)
       .pipe(retry(2));
   }
 
@@ -28,10 +26,12 @@ export class TransactionsService {
   ) {
     const queryParams = this.getQueryParams(page, limit, sortBy, sortOrder);
 
-    return this.httpClient
-      .get<Transaction[]>(`${transactionsBaseUrl}/transactions${queryParams}`, {
+    return this.httpClient.get<Transaction[]>(
+      `${environment.appApis.transactions}${queryParams}`,
+      {
         observe: 'response',
-      });
+      }
+    );
   }
 
   private getQueryParams(

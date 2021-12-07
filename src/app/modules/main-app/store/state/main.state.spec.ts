@@ -1,7 +1,6 @@
 import { of } from 'rxjs';
 
 import { MainState } from './main.state';
-
 import * as mocks from '../../../../core/spec';
 
 describe('MainState', () => {

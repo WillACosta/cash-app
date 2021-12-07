@@ -7,6 +7,7 @@ import {
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 
+import { environment } from '../../environments/environment';
 import { Account } from '../models/account.model';
 
 @Injectable({
@@ -27,7 +28,7 @@ export class AuthService {
     const payload = JSON.stringify({ email, password });
 
     return this.httpClient
-      .post<Account>(`${this.baseUrl}/login`, payload, this.httpOptions)
+      .post<Account>(environment.appApis.login, payload, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 
