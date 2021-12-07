@@ -1,96 +1,100 @@
-import { TestBed } from '@angular/core/testing';
-
-import { NgxsModule, Store } from '@ngxs/store';
-
-import {
-  fakeMainStateData,
-  fakeTransactionsData,
-  TransactionsServiceMock,
-} from 'src/app/core/spec/mocks';
-
-import { Transaction } from 'src/app/models/transaction.model';
-import { TransactionsService } from 'src/app/services/transactions.service';
-import { GetAllTransactions } from '../actions/main.actions';
+import { of } from 'rxjs';
 
 import { MainState } from './main.state';
 
+import * as mocks from '../../../../core/spec';
+
 describe('MainState', () => {
-  let store: Store;
+  let transactionsService: mocks.MockTransactionsService;
+  let mainState: MainState;
+  let stateContext: mocks.MockStateContext;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [NgxsModule.forRoot([MainState])],
-      providers: [
-        {
-          provide: TransactionsService,
-          useClass: TransactionsServiceMock,
-        },
-      ],
+    transactionsService = new mocks.MockTransactionsService();
+    mainState = new MainState(transactionsService as any);
+    stateContext = new mocks.MockStateContext();
+  });
+
+  describe('Store Actions', () => {
+    test('should set a list of `all transactions`', (done) => {
+      stateContext.getState.mockReturnValue(mocks.defaultMainStateValue);
+
+      transactionsService.getAllTransactions.mockReturnValue(
+        of(mocks.fakeTransactionsData)
+      );
+
+      mainState
+        .getAllTransactions(stateContext as any)
+        ?.subscribe(() => done());
+
+      expect(stateContext.patchState).toBeCalledWith(mocks.mainStateData);
     });
 
-    store = TestBed.inject(Store);
-  });
+    test('should not call service if `allTransactions` already exists in the state', () => {
+      stateContext.getState.mockReturnValue(mocks.mainStateData);
+      transactionsService.getAllTransactions.mockReturnValue(
+        of(mocks.mainStateData)
+      );
 
-  it('should be created', () => {
-    expect(store).toBeTruthy();
-  });
+      mainState.getAllTransactions(stateContext as any)?.subscribe();
+      expect(transactionsService.getAllTransactions).not.toBeCalled();
+    });
 
-  it('should return the default state', () => {
-    expect(store.selectSnapshot(MainState)).toEqual({
-      transactions: [],
+    test('should set a list of `paginated transactions`', (done) => {
+      transactionsService.getPaginatedTransactions.mockReturnValue(
+        of(mocks.mockPaginatedTransactionsResponse)
+      );
+
+      stateContext.getState.mockReturnValue(mocks.defaultMainStateValue);
+
+      mainState
+        .getPaginatedTransactions(stateContext as any, {
+          payload: { page: 1, limit: 2, sortBy: null, sortOrder: null },
+        })
+        ?.subscribe(() => {
+          expect(stateContext.patchState).toHaveBeenCalledWith({
+            paginatedTransactions: {
+              transactions: mocks.fakeTransactionsData,
+              resultsLength: 2,
+            },
+          });
+          done();
+        });
     });
   });
 
-  it('should dispatch `GetAllTransactions` Action', () => {
-    spyOn(store, 'dispatch');
+  describe('Store Selectors', () => {
+    test('should select all transactions in the state', () => {
+      const actualValue = MainState.allTransactions(
+        mocks.mockMainStateValue as any
+      );
+      expect(actualValue).toEqual(mocks.fakeTransactionsData);
+    });
 
-    store.dispatch(new GetAllTransactions());
-    expect(store.dispatch).toHaveBeenCalledWith(new GetAllTransactions());
-  });
+    test('should select paginated transactions in the state', () => {
+      const actualValue = MainState.paginatedTransactions(
+        mocks.mockMainStateValue as any
+      );
 
-  it('should return the state with `allTransactions`', () => {
-    store.dispatch(new GetAllTransactions());
-    expect(store.selectSnapshot(MainState.allTransactions)).toEqual(
-      fakeTransactionsData
-    );
-  });
+      expect(actualValue).toEqual(
+        mocks.mockMainStateValue.paginatedTransactions
+      );
+    });
 
-  it('should select `allTransactions`', (done) => {
-    store.dispatch(new GetAllTransactions());
+    test('should select `incoming` transactions in the state', () => {
+      const actualValue = MainState.incomingTransactions(
+        mocks.mockMainStateValue as any
+      );
 
-    store
-      .select(MainState.allTransactions)
-      .subscribe((transactions: Transaction[]) => {
-        expect(transactions).toEqual(fakeTransactionsData);
-        done();
-      });
-  });
+      expect(actualValue).toEqual(mocks.mockIncomingTransactions);
+    });
 
-  it('should select `incoming` of `allTransactions`', (done) => {
-    store.dispatch(new GetAllTransactions());
+    test('should select `expense` transactions in the state', () => {
+      const actualValue = MainState.expenseTransactions(
+        mocks.mockMainStateValue as any
+      );
 
-    store
-      .select(MainState.incomingTransactions)
-      .subscribe((transactions: Transaction[]) => {
-        expect(transactions).toEqual(
-          fakeTransactionsData.filter((t) => t.type === 'incoming')
-        );
-
-        done();
-      });
-  });
-
-  it('should select `expense` transactions', (done) => {
-    store.dispatch(new GetAllTransactions());
-
-    store
-      .select(MainState.expenseTransactions)
-      .subscribe((transactions: Transaction[]) => {
-        expect(transactions).toEqual(
-          fakeTransactionsData.filter((t) => t.type === 'expense')
-        );
-
-        done();
-      });
+      expect(actualValue).toEqual(mocks.mockExpenseTransactions);
+    });
   });
 });

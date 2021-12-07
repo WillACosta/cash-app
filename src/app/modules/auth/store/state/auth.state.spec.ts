@@ -1,88 +1,72 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
-
-import { NgxsModule, Store } from '@ngxs/store';
-
-import { AuthServiceMock } from 'src/app/core/spec/mocks';
-import { AuthService } from 'src/app/services/auth.service';
-
-import { Login, Logout } from '../actions/auth.actions';
 import { AuthState } from './auth.state';
+import { of } from 'rxjs';
 
-xdescribe('AuthState', () => {
-  let store: Store;
+import { Login } from '../actions/auth.actions';
+import { AuthServiceMock, MockStateContext } from '../../../../core/spec';
+
+describe('AuthState', () => {
+  let authService: AuthServiceMock;
+  let authState: AuthState;
+  let stateContext: MockStateContext;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [NgxsModule.forRoot([AuthState]), HttpClientTestingModule],
-      providers: [
-        {
-          provide: AuthService,
-          useClass: AuthServiceMock,
-        },
-      ],
+    stateContext = new MockStateContext();
+    authService = new AuthServiceMock();
+    authState = new AuthState(authService as any);
+  });
+
+  describe('Store Actions', () => {
+    test('should set token if it does not exist', (done) => {
+      stateContext.getState.mockReturnValue({ token: null });
+      authService.login.mockReturnValue(of({ token: 'fake-token' }));
+
+      authState
+        .login(stateContext as any, new Login({ email: '', password: '' }))
+        .subscribe(() => {
+          expect(stateContext.setState).toHaveBeenCalledWith({
+            token: 'fake-token',
+          });
+
+          done();
+        });
     });
 
-    store = TestBed.inject(Store);
+    test('should not call service if token already exists in the state', () => {
+      const token = 'fake-token';
+      stateContext.getState.mockReturnValue(token);
+      authService.login.mockReturnValue(of(token));
+
+      expect(authService.login).not.toHaveBeenCalled();
+    });
   });
 
-  it('should create an instance of store', () => {
-    expect(store).toBeTruthy();
-  });
-
-  it('should return the default state', () => {
-    const state = store.selectSnapshot(AuthState);
-    expect(state).toEqual({
+  describe('Store Selectors', () => {
+    const mockStateWithoutToken = {
       token: null,
-    });
-  });
+    };
 
-  it('should select token', () => {
-    const token = store.selectSnapshot(AuthState.token);
-    expect(token).toBeNull();
-  });
+    const mockStateWithToken = {
+      token: 'fake-token',
+    };
 
-  it('should select isAuthenticated', () => {
-    const isAuthenticated = store.selectSnapshot(AuthState.isAuthenticated);
-    expect(isAuthenticated).toBeFalsy();
-  });
-
-  it('should select requested token from state', () => {
-    store.reset({
-      ...store.snapshot(),
-      auth: {
-        token: 'fake-token',
-      },
+    test('should get an empty value of `token`', () => {
+      const actualValue = AuthState.token(mockStateWithoutToken);
+      expect(actualValue).toEqual(null);
     });
 
-    store
-      .selectOnce((state) => state.auth.token)
-      .subscribe((state) => {
-        expect(state).toEqual('fake-token');
-      });
-
-    const token = store.selectSnapshot((state) => state.auth.token);
-    expect(token).toBeTruthy();
-  });
-
-  it('should dispatch login action', () => {
-    store.dispatch(new Login({ email: '', password: '' }));
-
-    const state = store.selectSnapshot((state) => state.auth.token);
-    expect(state).toBeTruthy();
-  });
-
-  it('should dispatch logout action and clear user token', () => {
-    store.reset({
-      ...store.snapshot(),
-      auth: {
-        token: 'fake-token',
-      },
+    test('should get an false value when `token` is invalid', () => {
+      const actualValue = AuthState.isAuthenticated(mockStateWithoutToken);
+      expect(actualValue).toEqual(false);
     });
 
-    store.dispatch(new Logout());
+    test('should get an valid token value', () => {
+      const actualValue = AuthState.token(mockStateWithToken);
+      expect(actualValue).toEqual('fake-token');
+    });
 
-    const state = store.selectSnapshot((state) => state.auth.token);
-    expect(state).toBe(null);
+    test('should get an true value when `token` is valid', () => {
+      const actualValue = AuthState.isAuthenticated(mockStateWithToken);
+      expect(actualValue).toEqual(true);
+    });
   });
 });

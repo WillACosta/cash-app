@@ -3,8 +3,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 
-import { Transaction } from 'src/app/models/transaction.model';
-import { MainState } from 'src/app/modules/main-app/store/state/main.state';
+import { Transaction } from '../../../../models/transaction.model';
+import { MainState } from '../../../../modules/main-app/store/state/main.state';
 import { GetAllTransactions } from '../../store/actions/main.actions';
 
 @Component({

@@ -3,17 +3,17 @@ import { Router } from '@angular/router';
 import { Actions, Store } from '@ngxs/store';
 import { ToastrService } from 'ngx-toastr';
 
-import { provider } from '../../../../core/spec/mocks';
+import { provider } from '../../../../core/spec';
 import { Login } from '../../store/actions/auth.actions';
 import { LoginComponent } from './login.component';
+import { AccountProps } from '../../../../models/account-props.model';
+import { of } from 'rxjs';
 
 const storeMock = {
   dispatch: jest.fn(),
 };
 
-const actionsMock$ = {
-  pipe: jest.fn(),
-};
+const actionsMock$ = of({});
 
 const routerMock = {
   navigate: jest.fn(),
@@ -28,19 +28,19 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let toastrService: ToastrService;
   let router: typeof routerMock;
-  let actions$: typeof actionsMock$;
+  let actions: typeof actionsMock$;
   let store: typeof storeMock;
 
   beforeEach(() => {
     store = storeMock;
     router = routerMock;
-    actions$ = actionsMock$;
+    actions = actionsMock$;
 
     component = new LoginComponent(
       provider(router),
       provider(toastrService),
       provider(store),
-      provider(actions$)
+      provider(actions)
     );
   });
 
@@ -48,35 +48,27 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  test('should call generateLoginForm', () => {
+    const generateLoginFormSpy = jest.spyOn(component, 'generateLoginForm');
+    component.ngOnInit();
+    expect(generateLoginFormSpy).toHaveBeenCalled();
+  });
+
+  test('should generate loginForm with default values', () => {
+    const expectedValue: AccountProps = {
+      email: '',
+      password: '',
+    };
+
+    component.generateLoginForm();
+    expect(component.loginForm.value).toEqual(expectedValue);
+  });
+
   test('should dispatch the `Login` action', () => {
     store.dispatch(loginAction);
     store.dispatch.mockReturnValue(Promise.resolve());
 
-    expect(store.dispatch).toHaveBeenCalled();
-    expect(store.dispatch).toHaveBeenCalledWith(loginAction);
+    expect(store.dispatch).toBeCalled();
+    expect(store.dispatch).toBeCalledWith(loginAction);
   });
-
-  test('should navigate to the initial route when Login action is successful', () => {
-    jest.spyOn(router, 'navigate').mockReturnValue(Promise.resolve());
-
-    store.dispatch(loginAction);
-    store.dispatch.mockResolvedValueOnce(
-      router.navigate.mockReturnValue(Promise.resolve())
-    );
-
-    expect(router.navigate).toHaveBeenCalled();
-
-    // actionsMock$.pipe.mockReturnValue();
-  });
-
-  // it('should verify if user is redirected to initial route after LoginAction is successful', (done) => {
-  //   actions$.pipe(ofActionSuccessful(Login)).subscribe(() => {
-  //     done();
-  //   });
-
-  //   spyOn(router, 'navigate');
-  //   store.dispatch(new Login({ email: '', password: '' }));
-
-  //   expect(router.navigate).toHaveBeenCalledWith(['']);
-  // });
 });

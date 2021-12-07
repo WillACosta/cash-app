@@ -42,6 +42,7 @@
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
     "@ngxs/devtools-plugin": "^3.7.2",
+    "@testing-library/angular": "^11.0.0",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.10",
     "babel-jest": "^27.3.1",

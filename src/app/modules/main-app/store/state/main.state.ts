@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs';
 
-import { TransactionsService } from 'src/app/services/transactions.service';
+import { TransactionsService } from '../../../../services/transactions.service';
 
 import {
   PaginatedTransactions,
@@ -55,21 +55,33 @@ export class MainState {
   }
 
   @Action(GetAllTransactions)
-  getAllTransactions(context: StateContext<MainStateModel>) {
-    return this.transactionsService
-      .getAllTransactions()
-      .pipe(
-        tap((transactions) =>
-          this.patchTransactionState(context, transactions, 'allTransactions')
-        )
-      );
+  getAllTransactions({ patchState, getState }: StateContext<MainStateModel>) {
+    if (getState().allTransactions.length > 0) {
+      return;
+    }
+
+    return this.transactionsService.getAllTransactions().pipe(
+      tap((transactions) => {
+        const deserializableData = transactions.map((t) => {
+          return new Transaction().deserialize(t);
+        });
+
+        patchState({
+          allTransactions: deserializableData,
+        });
+      })
+    );
   }
 
   @Action(GetPaginatedTransactions)
   getPaginatedTransactions(
-    { patchState }: StateContext<MainStateModel>,
+    { patchState, getState }: StateContext<MainStateModel>,
     { payload }: GetPaginatedTransactions
   ) {
+    if (getState().paginatedTransactions.transactions.length > 0) {
+      return;
+    }
+
     return this.transactionsService
       .getPaginatedTransactions(
         payload.page,
@@ -87,18 +99,6 @@ export class MainState {
           })
         )
       );
-  }
-
-  private patchTransactionState(
-    context: StateContext<MainStateModel>,
-    transactions: Transaction[],
-    stateName: string
-  ) {
-    const deserializableData = transactions.map((t) => {
-      return new Transaction().deserialize(t);
-    });
-
-    context.patchState({ [stateName]: deserializableData });
   }
 
   private static getFilteredTransactions(

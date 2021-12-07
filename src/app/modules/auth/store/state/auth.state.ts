@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs';
 
-import { Account } from 'src/app/models/account.model';
-import { AuthService } from 'src/app/services/auth.service';
-
+import { Account } from '../../../../models/account.model';
+import { AuthService } from '../../../../services/auth.service';
 import { Login, Logout } from '../actions/auth.actions';
 
 @State<Account>({
@@ -28,10 +27,10 @@ export class AuthState {
   }
 
   @Action(Login)
-  login({ patchState }: StateContext<Account>, { payload }: Login) {
+  login({ setState }: StateContext<Account>, { payload }: Login) {
     return this.authService.login(payload.email!, payload.password!).pipe(
       tap((result: Account) => {
-        patchState({
+        setState({
           token: result.token,
         });
       })

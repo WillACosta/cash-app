@@ -1,6 +1,6 @@
 import { throwError, of } from 'rxjs';
 
-import { fakeHttpClient, provider } from '../core/spec/mocks';
+import { fakeHttpClient, provider } from '../core/spec';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {

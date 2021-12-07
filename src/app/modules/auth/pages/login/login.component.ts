@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginSuccessSubscription!: Subscription;
   loginErrorSubscription!: Subscription;
 
-  unsubscriber$ = new Subject<void>();
+  private actionSuccessSubcription = new Subscription();
+  private actionErrorSubscription = new Subscription();
 
   email?: string;
   password?: string;
@@ -45,45 +46,16 @@ export class LoginComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private store: Store,
     private actions: Actions
-  ) {
-    this.initLoginForm();
-  }
-
-  private initLoginForm() {
-    this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl('', Validators.required),
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.actions
-      .pipe(
-        ofActionSuccessful(Login),
-        tap(() => (this.pageState = PageState.loaded)),
-        takeUntil(this.unsubscriber$)
-      )
-      .subscribe(() => {
-        this.router.navigate(['']);
-      });
-
-    this.actions
-      .pipe(
-        ofActionErrored(Login),
-        tap(() => (this.pageState = PageState.loaded)),
-        takeUntil(this.unsubscriber$)
-      )
-      .subscribe(() => {
-        this.toastr.warning(
-          'Não foi possível efetuar seu login, tente novamente mais tarde!',
-          'Oops!'
-        );
-      });
+    this.generateLoginForm();
+    this.setListeners();
   }
 
   ngOnDestroy(): void {
-    this.unsubscriber$.next();
-    this.unsubscriber$.complete();
+    this.actionSuccessSubcription.unsubscribe();
+    this.actionErrorSubscription.unsubscribe();
   }
 
   login() {
@@ -97,5 +69,39 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   togleInputVisibility() {
     this.hideText = !this.hideText;
+  }
+
+  generateLoginForm() {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.email, Validators.required]),
+      password: new FormControl('', Validators.required),
+    });
+  }
+
+  setListeners() {
+    this.actionSuccessSubcription.add(
+      this.actions
+        .pipe(
+          ofActionSuccessful(Login),
+          tap(() => (this.pageState = PageState.loaded))
+        )
+        .subscribe(() => {
+          this.router.navigate(['']);
+        })
+    );
+
+    this.actionErrorSubscription.add(
+      this.actions
+        .pipe(
+          ofActionErrored(Login),
+          tap(() => (this.pageState = PageState.loaded))
+        )
+        .subscribe(() => {
+          this.toastr.warning(
+            'Não foi possível efetuar seu login, tente novamente mais tarde!',
+            'Oops!'
+          );
+        })
+    );
   }
 }

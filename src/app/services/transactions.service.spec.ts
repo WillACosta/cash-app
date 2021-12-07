@@ -5,7 +5,7 @@ import {
   fakeHttpClient,
   fakeTransactionsData,
   provider,
-} from '../core/spec/mocks';
+} from '../core/spec';
 
 import { of } from 'rxjs';
 
