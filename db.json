@@ -1,18 +1,10 @@
 {
-  "transactions": [{
-      "id": 1,
-      "amount": 150,
-      "currency": "BRL",
-      "date": "2018-01-01",
-      "type": "expense",
-      "isPayed": true,
-      "description": "Pagamento de conta de energia"
-    },
+  "transactions": [
     {
       "id": 2,
       "amount": 1260,
       "currency": "BRL",
-      "date": "2018-01-01",
+      "date": "2021-10-17T14:38:45.540Z",
       "type": "incoming",
       "isPayed": null,
       "description": "Salário do mês"
@@ -21,7 +13,7 @@
       "id": 3,
       "amount": 20,
       "currency": "BRL",
-      "date": "2018-01-01",
+      "date": "2021-10-17T14:38:45.540Z",
       "type": "incoming",
       "isPayed": null,
       "description": "Recebimento de empréstimo"
@@ -30,7 +22,7 @@
       "id": 4,
       "amount": 20,
       "currency": "BRL",
-      "date": "2018-01-01",
+      "date": "2021-01-17T14:38:45.540Z",
       "type": "incoming",
       "isPayed": null,
       "description": "Recebimento de empréstimo"
@@ -39,7 +31,7 @@
       "id": 5,
       "amount": 20,
       "currency": "BRL",
-      "date": "2018-01-01",
+      "date": "2021-01-17T14:38:45.540Z",
       "type": "incoming",
       "isPayed": null,
       "description": "Recebimento de empréstimo"
@@ -48,7 +40,7 @@
       "id": 6,
       "amount": 20,
       "currency": "BRL",
-      "date": "2018-01-01",
+      "date": "2021-06-17T14:38:45.540Z",
       "type": "incoming",
       "isPayed": null,
       "description": "Recebimento de empréstimo"
@@ -57,7 +49,7 @@
       "id": 7,
       "amount": 20,
       "currency": "BRL",
-      "date": "2018-01-01",
+      "date": "2021-06-17T14:38:45.540Z",
       "type": "incoming",
       "isPayed": null,
       "description": "Recebimento de empréstimo"
@@ -66,7 +58,7 @@
       "id": 8,
       "amount": 20,
       "currency": "BRL",
-      "date": "2018-01-01",
+      "date": "2021-07-17T14:38:45.540Z",
       "type": "incoming",
       "isPayed": null,
       "description": "Recebimento de empréstimo"
@@ -75,7 +67,7 @@
       "id": 9,
       "amount": 20,
       "currency": "BRL",
-      "date": "2018-01-01",
+      "date": "2021-07-17T14:38:45.540Z",
       "type": "incoming",
       "isPayed": null,
       "description": "Recebimento de empréstimo"
@@ -84,19 +76,91 @@
       "id": 10,
       "amount": 20,
       "currency": "BRL",
-      "date": "2018-01-01",
+      "date": "2021-12-17T14:38:45.540Z",
       "type": "incoming",
       "isPayed": null,
       "description": "Recebimento de empréstimo"
     },
     {
-      "id": 11,
-      "amount": 36.21,
+      "id": 2,
+      "amount": 100,
       "currency": "BRL",
-      "date": "2021-01-12",
+      "date": "2021-10-17T14:38:45.540Z",
       "type": "expense",
-      "isPayed": true,
-      "description": "Pagamento de empréstimo"
+      "isPayed": null,
+      "description": "Salário do mês"
+    },
+    {
+      "id": 3,
+      "amount": 12,
+      "currency": "BRL",
+      "date": "2021-10-17T14:38:45.540Z",
+      "type": "expense",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 4,
+      "amount": 35,
+      "currency": "BRL",
+      "date": "2021-01-17T14:38:45.540Z",
+      "type": "expense",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 5,
+      "amount": 8,
+      "currency": "BRL",
+      "date": "2021-01-17T14:38:45.540Z",
+      "type": "expense",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 6,
+      "amount": 123.65,
+      "currency": "BRL",
+      "date": "2021-06-17T14:38:45.540Z",
+      "type": "expense",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 7,
+      "amount": 200,
+      "currency": "BRL",
+      "date": "2021-06-17T14:38:45.540Z",
+      "type": "expense",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 8,
+      "amount": 6.5,
+      "currency": "BRL",
+      "date": "2021-07-17T14:38:45.540Z",
+      "type": "expense",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 9,
+      "amount": 123,
+      "currency": "BRL",
+      "date": "2021-07-17T14:38:45.540Z",
+      "type": "expense",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
+    },
+    {
+      "id": 10,
+      "amount": 20,
+      "currency": "BRL",
+      "date": "2021-12-17T14:38:45.540Z",
+      "type": "expense",
+      "isPayed": null,
+      "description": "Recebimento de empréstimo"
     }
   ]
 }
