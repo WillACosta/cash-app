@@ -1,68 +1,27 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-# CashApp
-
-Aplicação de registros financeiros desenvolvida em Angular 13.
+Desenvolvida com Angular 13, `CashApp` é uma aplicação para registrar movimentações financeiras de entradas e saídas, fornecendo estatísticas das transações com uso de gráficos e uma interface simples e minimalista.
 
 ## Protótipo do projeto
 
 https://www.figma.com/file/XDP3UijlKEZH1a78jTs6Vi/Desafio-PDZ?node-id=0%3A1
 
+## Como usar
 
-## API
+1. Instale as dependências do projeto com
+   `npm install` ou `yarn install`
 
-1. Instale a biblioteca do JSON Server
-   `npm i -g json-server`
+2. Execute o servidor local (Json Api)
+   `npm run server` ou `yarn server`
 
-2. Para executar o servidor
-   `npm run server`
+3. Execute o projeto
+   `npm run start` ou `yarn start`
 
-### Rotas Disponíveis
+### Dados para acesso
 
-As rotas suportam todos os verbos HTTP
+A aplicação utiliza os serviços de uma API pública que simula um sistema de autenticação com JWT. Confira-a [aqui](https://reqres.in/).
 
-Url base: `http://localhost:3000`
-
-`/transactions`
-
-#### Paginação
-
-GET `/transactions?\_page=7&\_limit=20`
-
-#### Ordenação
-
-GET `/posts?_sort=views&_order=asc`
-
-#### Models
-
-```javascript
-//  JSON de saídas
-{
-   "id": "1",
-   "amount": "150",
-   "currency": "BRL",
-   "created_at": "2018-01-01T00:00:00Z",
-   "source": "expanse",
-   "isPayed": "true",
-   "description": "Pagamento de conta de energia"
-},
-
-// JSON de entradas
-{
-   "id": "2",
-   "amount": "1260",
-   "currency": "BRL",
-   "created_at": "2018-01-01T00:00:00Z",
-   "source": "incoming",
-   "description": "Salário do mês"
-},
-```
-
-### Rotas de autenticação
-
-URL Base: `https://reqres.in/api`
-
-`/login`
+Para efetuar login no sistema, utilize as credenciais abaixo
 
 ```javascript
 {
