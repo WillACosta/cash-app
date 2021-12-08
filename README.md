@@ -1,7 +1,7 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-<div align="center" border-radius="100px">
-  <img src="./src/assets/cash-logo.svg" style="text-align:center"/>
+<div align="center">
+  <img src="./src/assets/cash-logo.svg"/>
 </div><br>
 
 Desenvolvida com Angular 13, `CashApp` é uma aplicação para registrar movimentações financeiras de entradas e saídas, fornecendo estatísticas das transações com uso de gráficos e uma interface simples e minimalista.
