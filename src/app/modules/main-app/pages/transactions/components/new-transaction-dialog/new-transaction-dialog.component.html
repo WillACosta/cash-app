@@ -40,7 +40,11 @@
       type="text">
     </app-button>
 
-    <app-button (onClickedEvent)="saveTransaction()" label="Salvar"
+    <app-loading-button *ngIf="pageState == PageStateType.loading">
+    </app-loading-button>
+
+    <app-button *ngIf="pageState != PageStateType.loading"
+      (onClickedEvent)="saveTransaction()" label="Salvar"
       [disabled]="newTransactionForm.invalid"></app-button>
   </div>
 </div>

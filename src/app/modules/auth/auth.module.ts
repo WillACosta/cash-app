@@ -10,7 +10,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 
-import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 
 import { AuthRoutingModule } from './auth-routing.module';
@@ -30,7 +29,7 @@ import { AuthService } from 'src/app/services/auth.service';
     MatFormFieldModule,
     MatIconModule,
   ],
-  declarations: [RegisterComponent, LoginComponent],
+  declarations: [LoginComponent],
   providers: [AuthService],
 })
 export class AuthModule {}

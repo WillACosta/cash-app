@@ -1,20 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MatDialogRef } from '@angular/material/dialog';
-import { Store } from '@ngxs/store';
+import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
+import { Subscription, tap } from 'rxjs';
 
 import { SaveTransaction } from '../../store/transactions.actions';
+
+enum PageState {
+  initial,
+  loading,
+  loaded,
+}
 
 @Component({
   selector: 'app-new-transaction-dialog',
   templateUrl: './new-transaction-dialog.component.html',
   styleUrls: ['./new-transaction-dialog.component.scss'],
 })
-export class NewTransactionDialogComponent implements OnInit {
+export class NewTransactionDialogComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
-    private dialogRef: MatDialogRef<NewTransactionDialogComponent>
+    private dialogRef: MatDialogRef<NewTransactionDialogComponent>,
+    private actions$: Actions
   ) {}
 
   newTransactionForm: FormGroup;
@@ -24,20 +32,32 @@ export class NewTransactionDialogComponent implements OnInit {
     { value: 'expense', viewValue: 'Saída' },
   ];
 
+  PageStateType = PageState;
+  pageState = PageState.initial;
+
+  subscription: Subscription = new Subscription();
+
   ngOnInit(): void {
     this.initForm();
+    this.setListeners();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   saveTransaction() {
     if (this.newTransactionForm.invalid) return;
+
+    this.pageState = this.PageStateType.loading;
 
     const payload = {
       ...this.newTransactionForm.value,
       amount: Number(this.newTransactionForm.value.amount),
     };
 
-    // Loading
     this.store.dispatch(new SaveTransaction(payload));
+    this.closeModal();
   }
 
   closeModal() {
@@ -56,5 +76,18 @@ export class NewTransactionDialogComponent implements OnInit {
       description: new FormControl('', [Validators.required]),
       isPayed: new FormControl(false),
     });
+  }
+
+  private setListeners() {
+    this.subscription.add(
+      this.actions$
+        .pipe(
+          ofActionSuccessful(SaveTransaction),
+          tap(() => {
+            this.pageState = this.PageStateType.loaded;
+          })
+        )
+        .subscribe(() => this.closeModal())
+    );
   }
 }

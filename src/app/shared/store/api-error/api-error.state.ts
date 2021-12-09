@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Action, State, StateContext } from '@ngxs/store';
-import { map } from 'rxjs';
 
-import { ApiErrorDialogComponent } from '../../components/molecules/api-error-dialog/api-error-dialog.component';
+import { Action, State, StateContext } from '@ngxs/store';
+import { ToastrService } from 'ngx-toastr';
+
 import { HandleApiError } from './api-error.actions';
 
 @State({
@@ -14,14 +14,13 @@ import { HandleApiError } from './api-error.actions';
   providedIn: 'root',
 })
 export class ApiErrorState {
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private toastr: ToastrService) {}
 
   @Action(HandleApiError)
   handleApiError(ctx: StateContext<void>, { error, action }: HandleApiError) {
-    const dialogRef = this.dialog.open(ApiErrorDialogComponent, {
-      disableClose: true,
-    });
-
-    dialogRef.afterClosed().pipe(map(() => ctx.dispatch(action)));
+    this.toastr.warning(
+      'Não foi possível processar sua solicitação tente novamente mais tarde!',
+      'Oops! Occoreu um erro'
+    );
   }
 }
