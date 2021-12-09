@@ -15,6 +15,14 @@ export class Transaction implements Deserializable {
   }
 }
 
+export interface TransactionProps {
+  type: 'incoming' | 'expense';
+  date: string;
+  description: string;
+  amount: number;
+  isPayed: boolean | null;
+}
+
 export interface PaginatedTransactions {
   transactions: Transaction[];
   resultsLength: number;

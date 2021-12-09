@@ -23,6 +23,8 @@ import {
   toastrModuleConfig,
 } from './core/app.module.configurations';
 
+import { SharedModule } from './shared/shared.module';
+
 registerLocaleData(localept, 'pt');
 
 @NgModule({
@@ -37,6 +39,7 @@ registerLocaleData(localept, 'pt');
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot(ngxsStoragePluginConfig),
+    SharedModule,
   ],
   providers: [
     {

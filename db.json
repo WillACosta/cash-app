@@ -1,6 +1,5 @@
 {
-  "transactions": [
-    {
+  "transactions": [{
       "id": 2,
       "amount": 1260,
       "currency": "BRL",

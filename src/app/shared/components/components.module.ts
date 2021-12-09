@@ -18,6 +18,7 @@ import { ThemeSwitcherComponent } from './atoms/theme-swicther/theme-switcher.co
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { CTableComponent } from './molecules/c-table/c-table.component';
 import { ButtonComponent } from './atoms/button/button.component';
+import { ApiErrorDialogComponent } from './molecules/api-error-dialog/api-error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ButtonComponent } from './atoms/button/button.component';
     ThemeSwitcherComponent,
     CTableComponent,
     ButtonComponent,
+    ApiErrorDialogComponent,
   ],
   imports: [
     CommonModule,

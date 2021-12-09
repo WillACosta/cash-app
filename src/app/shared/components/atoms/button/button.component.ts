@@ -12,6 +12,9 @@ export class ButtonComponent {
   @Input()
   disabled: boolean = false;
 
+  @Input()
+  type: 'primary' | 'text' = 'primary';
+
   @Output()
   onClickedEvent: EventEmitter<any> = new EventEmitter<any>();
 

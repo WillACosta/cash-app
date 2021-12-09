@@ -1,0 +1,46 @@
+<div class="cash-modal">
+  <div class="cash-modal-header">
+    <h1>Nova transação</h1>
+  </div>
+
+  <div class="cash-modal-body mt-5">
+    <form [formGroup]="newTransactionForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo</mat-label>
+        <mat-select
+          formControlName="type" placeholder="Selecione">
+          <mat-option *ngFor="let type of transactionType" [value]="type.value">
+            {{type.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Data</mat-label>
+        <input matInput [matDatepicker]="dp" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Valor</mat-label>
+        <input matInput name="amount" formControlName="amount" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Descrição</mat-label>
+        <input matInput name="description" formControlName="description" />
+      </mat-form-field>
+
+    </form>
+  </div>
+
+  <div class="cash-modal-footer">
+    <app-button (onClickedEvent)="closeModal()" label="Cancelar"
+      type="text">
+    </app-button>
+
+    <app-button (onClickedEvent)="saveTransaction()" label="Salvar"
+      [disabled]="newTransactionForm.invalid"></app-button>
+  </div>
+</div>

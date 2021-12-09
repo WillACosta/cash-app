@@ -1,0 +1,7 @@
+@import "./rem-calc";
+
+.cash-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: rem-calc(15);
+}

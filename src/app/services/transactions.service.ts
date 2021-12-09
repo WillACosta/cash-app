@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { retry } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { Transaction } from '../models/transaction.model';
+import { Transaction, TransactionProps } from '../models/transaction.model';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +32,12 @@ export class TransactionsService {
         observe: 'response',
       }
     );
+  }
+
+  saveTransaction(payload: TransactionProps) {
+    return this.httpClient
+      .post<Transaction>(environment.appApis.transactions, payload)
+      .pipe(retry(2));
   }
 
   private getQueryParams(
