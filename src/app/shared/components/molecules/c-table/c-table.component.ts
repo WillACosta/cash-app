@@ -1,17 +1,24 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 
-import { Store } from '@ngxs/store';
+import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
 
 import { merge, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, map, startWith, switchMap, tap } from 'rxjs/operators';
 
 import { getRangeLabel } from 'src/app/core/utils';
 import { Transaction } from 'src/app/models/transaction.model';
 import { GetPaginatedTransactions } from 'src/app/modules/main-app/store/actions/main.actions';
+import { UpdateTransactions } from 'src/app/shared/store/shared.actions';
 
 export interface UserData {
   id: string;
@@ -41,7 +48,11 @@ export class CTableComponent implements OnInit, AfterViewInit {
 
   resultsLength = 0;
 
-  constructor(private _store: Store) {}
+  constructor(
+    private _store: Store,
+    private actions$: Actions,
+    private changeDetectorRefs: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource();
@@ -77,6 +88,13 @@ export class CTableComponent implements OnInit, AfterViewInit {
         this.dataSource.data = stateValue.transactions;
         this.resultsLength = stateValue.resultsLength;
       });
+
+    this.actions$
+      .pipe(
+        ofActionSuccessful(UpdateTransactions),
+        tap(() => this.dataSource)
+      )
+      .subscribe((_) => this.changeDetectorRefs.detectChanges());
   }
 
   applyFilter(event: Event) {

@@ -3,9 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription, tap } from 'rxjs';
 
 import { SaveTransaction } from '../../store/transactions.actions';
+import { UpdateTransactions } from '../../../../../../shared/store/shared.actions';
 
 enum PageState {
   initial,
@@ -22,7 +24,8 @@ export class NewTransactionDialogComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
     private dialogRef: MatDialogRef<NewTransactionDialogComponent>,
-    private actions$: Actions
+    private actions$: Actions,
+    private toastr: ToastrService
   ) {}
 
   newTransactionForm: FormGroup;
@@ -87,7 +90,12 @@ export class NewTransactionDialogComponent implements OnInit, OnDestroy {
             this.pageState = this.PageStateType.loaded;
           })
         )
-        .subscribe(() => this.closeModal())
+        .subscribe(() => {
+          this.toastr.success('Transação salva com sucesso!');
+          this.store.dispatch(new UpdateTransactions());
+
+          this.closeModal();
+        })
     );
   }
 }

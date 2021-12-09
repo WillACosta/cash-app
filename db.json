@@ -1,5 +1,6 @@
 {
-  "transactions": [{
+  "transactions": [
+    {
       "id": 2,
       "amount": 1260,
       "currency": "BRL",
@@ -160,6 +161,38 @@
       "type": "expense",
       "isPayed": null,
       "description": "Recebimento de empréstimo"
+    },
+    {
+      "type": "incoming",
+      "amount": 5000,
+      "date": "2021-12-09T03:00:00.000Z",
+      "description": "Algumas paradas aí",
+      "isPayed": false,
+      "id": 11
+    },
+    {
+      "type": "expense",
+      "amount": 12,
+      "date": "2021-12-20T03:00:00.000Z",
+      "description": "Agora ée",
+      "isPayed": false,
+      "id": 12
+    },
+    {
+      "type": "incoming",
+      "amount": 122,
+      "date": "2021-12-21T03:00:00.000Z",
+      "description": "aeqeqwqwe",
+      "isPayed": false,
+      "id": 13
+    },
+    {
+      "type": "expense",
+      "amount": 1313,
+      "date": "2021-12-22T03:00:00.000Z",
+      "description": "13132312",
+      "isPayed": false,
+      "id": 14
     }
   ]
 }
