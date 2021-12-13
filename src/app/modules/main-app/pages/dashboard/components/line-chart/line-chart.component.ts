@@ -2,18 +2,20 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartType } from 'chart.js';
-
-import { Select } from '@ngxs/store';
-import * as _ from 'lodash';
-import { format } from 'date-fns';
+import { Actions, ofActionSuccessful, Select } from '@ngxs/store';
 import { combineLatest, Observable, Subscription } from 'rxjs';
+import { format } from 'date-fns';
 
-import { MainState } from 'src/app/modules/main-app/store/state/main.state';
-import { Transaction } from 'src/app/models/transaction.model';
+import { MainState } from '../../../../../../modules/main-app/store/state/main.state';
+import { Transaction } from '../../../../../../models/transaction.model';
+import { UpdateTransactions } from '../../../../../../shared/store/shared.actions';
+
 import {
   lineChartConfiguration,
   lineChartOptions,
 } from './chart-configuration';
+
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-line-chart',
@@ -21,6 +23,8 @@ import {
   styleUrls: ['./line-chart.component.scss'],
 })
 export class LineChartComponent implements OnInit, OnDestroy {
+  constructor(private actions$: Actions) {}
+
   public lineChartData: ChartConfiguration['data'] = lineChartConfiguration;
   public lineChartOptions: ChartConfiguration['options'] = lineChartOptions;
   public lineChartType: ChartType = 'line';
@@ -36,6 +40,7 @@ export class LineChartComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
   ngOnInit(): void {
+    this.chart?.update();
     this.setListeners();
   }
 
@@ -52,12 +57,49 @@ export class LineChartComponent implements OnInit, OnDestroy {
         const incomingResults = this.getGroupedAmountAndMonthLabels(incoming);
         const expenseResults = this.getGroupedAmountAndMonthLabels(expense);
 
-        this.lineChartData.datasets[0].data = incomingResults.amountValues;
-        this.lineChartData.datasets[1].data = expenseResults.amountValues;
+        if (
+          incomingResults.amountValues.length &&
+          expenseResults.amountValues.length &&
+          incomingResults.amountValues.length <
+            expenseResults.amountValues.length
+        ) {
+          this.lineChartData.datasets[0].data = this.getCorrelatedMonthValues(
+            incomingResults,
+            expenseResults
+          );
+        } else {
+          this.lineChartData.datasets[0].data = incomingResults.amountValues;
+        }
 
-        this.lineChartData.labels = incomingResults.labelValues; // Combine Months and get unique labels
+        if (
+          incomingResults.amountValues.length &&
+          expenseResults.amountValues.length &&
+          incomingResults.amountValues.length >
+            expenseResults.amountValues.length
+        ) {
+          this.lineChartData.datasets[1].data = this.getCorrelatedMonthValues(
+            incomingResults,
+            expenseResults
+          );
+        } else {
+          this.lineChartData.datasets[1].data = expenseResults.amountValues;
+        }
+
+        this.lineChartData.labels = this.getUniqueMonthLabels(
+          incomingResults.labelValues,
+          expenseResults.labelValues
+        );
+
         this.chart?.update();
       })
+    );
+
+    this.subscription.add(
+      this.actions$
+        .pipe(ofActionSuccessful(UpdateTransactions))
+        .subscribe(() => {
+          this.chart?.update();
+        })
     );
   }
 
@@ -112,5 +154,49 @@ export class LineChartComponent implements OnInit, OnDestroy {
     });
 
     return { amountValues: result, labelValues: monthKeys };
+  }
+
+  private getUniqueMonthLabels(
+    incomingLabels: Array<any>,
+    expenseLabels: Array<any>
+  ): Array<string> {
+    const mergedLabels = _.merge(incomingLabels, expenseLabels);
+    return _.uniq(mergedLabels);
+  }
+
+  private getCorrelatedMonthValues(incoming: any, expense: any) {
+    if (!incoming.amountValues?.length && !expense.amountValues?.length)
+      return [];
+
+    if (!incoming.amountValues?.length) return [];
+    if (!expense.amountValues?.length) return [];
+
+    let result: Array<any> = [];
+
+    if (incoming.amountValues.length > expense.amountValues.length) {
+      incoming.labelValues.forEach((label: string, index: number) => {
+        if (expense.labelValues.includes(label)) {
+          result.push(
+            expense.amountValues[_.indexOf(expense.labelValues, label)]
+          );
+        } else {
+          result.push(0);
+        }
+      });
+    }
+
+    if (expense.amountValues.length > incoming.amountValues.length) {
+      expense.labelValues.forEach((label: string, index: number) => {
+        if (incoming.labelValues.includes(label)) {
+          result.push(
+            incoming.amountValues[_.indexOf(incoming.labelValues, label)]
+          );
+        } else {
+          result.push(0);
+        }
+      });
+    }
+
+    return result;
   }
 }

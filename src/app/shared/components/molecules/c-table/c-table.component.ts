@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -12,27 +13,20 @@ import { MatSort } from '@angular/material/sort';
 
 import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
 
-import { merge, of as observableOf } from 'rxjs';
+import { merge, of as observableOf, Subscription } from 'rxjs';
 import { catchError, map, startWith, switchMap, tap } from 'rxjs/operators';
 
-import { getRangeLabel } from 'src/app/core/utils';
-import { Transaction } from 'src/app/models/transaction.model';
-import { GetPaginatedTransactions } from 'src/app/modules/main-app/store/actions/main.actions';
-import { UpdateTransactions } from 'src/app/shared/store/shared.actions';
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  fruit: string;
-}
+import { getRangeLabel } from '../../../../core/utils';
+import { Transaction } from '../../../../models/transaction.model';
+import { GetPaginatedTransactions } from '../../../../modules/main-app/store/actions/main.actions';
+import { UpdateTransactions } from '../../../../shared/store/shared.actions';
 
 @Component({
   selector: 'app-c-table',
   templateUrl: './c-table.component.html',
   styleUrls: ['./c-table.component.scss'],
 })
-export class CTableComponent implements OnInit, AfterViewInit {
+export class CTableComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns: string[] = [
     'date',
     'description',
@@ -46,6 +40,7 @@ export class CTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  subscriptions: Subscription[] = [];
   resultsLength = 0;
 
   constructor(
@@ -60,41 +55,11 @@ export class CTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+    this.setListeners();
+  }
 
-    merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        startWith({}),
-        switchMap(() => {
-          // loading
-          return this._store
-            .dispatch(
-              new GetPaginatedTransactions({
-                page: this.paginator.pageIndex + 1,
-                limit: this.paginator.pageSize,
-                sortBy: this.sort.active,
-                sortOrder: this.sort.direction,
-              })
-            )
-            .pipe(catchError(() => observableOf(null)));
-        }),
-        map(() => null)
-      )
-      .subscribe();
-
-    this._store
-      .select((state) => state.main.paginatedTransactions)
-      .subscribe((stateValue) => {
-        this.dataSource.data = stateValue.transactions;
-        this.resultsLength = stateValue.resultsLength;
-      });
-
-    this.actions$
-      .pipe(
-        ofActionSuccessful(UpdateTransactions),
-        tap(() => this.dataSource)
-      )
-      .subscribe((_) => this.changeDetectorRefs.detectChanges());
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   applyFilter(event: Event) {
@@ -104,6 +69,58 @@ export class CTableComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  private setListeners() {
+    this.subscriptions.push(
+      this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0))
+    );
+
+    this.subscriptions.push(
+      merge(this.sort.sortChange, this.paginator.page)
+        .pipe(
+          startWith({}),
+          switchMap(() => {
+            // loading
+            return this._store
+              .dispatch(
+                new GetPaginatedTransactions({
+                  page: this.paginator.pageIndex + 1,
+                  limit: this.paginator.pageSize,
+                  sortBy: this.sort.active,
+                  sortOrder: this.sort.direction,
+                })
+              )
+              .pipe(catchError(() => observableOf(null)));
+          }),
+          map(() => null)
+        )
+        .subscribe()
+    );
+
+    this.subscriptions.push(
+      this._store
+        .select((state) => state.main.paginatedTransactions)
+        .subscribe((stateValue) => {
+          this.dataSource.data = stateValue.transactions;
+          this.resultsLength = stateValue.resultsLength;
+        })
+    );
+
+    this.subscriptions.push(
+      this.actions$
+        .pipe(ofActionSuccessful(UpdateTransactions))
+        .subscribe((_) =>
+          this._store.dispatch(
+            new GetPaginatedTransactions({
+              page: 1,
+              limit: 5,
+              sortBy: 'date',
+              sortOrder: 'desc',
+            })
+          )
+        )
+    );
   }
 
   private translateMatPaginator() {

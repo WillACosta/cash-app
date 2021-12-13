@@ -17,7 +17,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Data</mat-label>
-        <input matInput [matDatepicker]="dp" formControlName="date">
+        <input matInput [matDatepicker]="dp" formControlName="date" mask="99/99/9999">
         <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
         <mat-datepicker #dp></mat-datepicker>
       </mat-form-field>

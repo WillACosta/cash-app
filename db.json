@@ -1,198 +1,60 @@
 {
   "transactions": [
     {
-      "id": 2,
-      "amount": 1260,
-      "currency": "BRL",
-      "date": "2021-10-17T14:38:45.540Z",
       "type": "incoming",
-      "isPayed": null,
-      "description": "Salário do mês"
-    },
-    {
-      "id": 3,
-      "amount": 20,
-      "currency": "BRL",
-      "date": "2021-10-17T14:38:45.540Z",
-      "type": "incoming",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 4,
-      "amount": 20,
-      "currency": "BRL",
-      "date": "2021-01-17T14:38:45.540Z",
-      "type": "incoming",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 5,
-      "amount": 20,
-      "currency": "BRL",
-      "date": "2021-01-17T14:38:45.540Z",
-      "type": "incoming",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 6,
-      "amount": 20,
-      "currency": "BRL",
-      "date": "2021-06-17T14:38:45.540Z",
-      "type": "incoming",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 7,
-      "amount": 20,
-      "currency": "BRL",
-      "date": "2021-06-17T14:38:45.540Z",
-      "type": "incoming",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 8,
-      "amount": 20,
-      "currency": "BRL",
-      "date": "2021-07-17T14:38:45.540Z",
-      "type": "incoming",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 9,
-      "amount": 20,
-      "currency": "BRL",
-      "date": "2021-07-17T14:38:45.540Z",
-      "type": "incoming",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 10,
-      "amount": 20,
-      "currency": "BRL",
-      "date": "2021-12-17T14:38:45.540Z",
-      "type": "incoming",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 2,
-      "amount": 100,
-      "currency": "BRL",
-      "date": "2021-10-17T14:38:45.540Z",
-      "type": "expense",
-      "isPayed": null,
-      "description": "Salário do mês"
-    },
-    {
-      "id": 3,
-      "amount": 12,
-      "currency": "BRL",
-      "date": "2021-10-17T14:38:45.540Z",
-      "type": "expense",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 4,
-      "amount": 35,
-      "currency": "BRL",
-      "date": "2021-01-17T14:38:45.540Z",
-      "type": "expense",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 5,
-      "amount": 8,
-      "currency": "BRL",
-      "date": "2021-01-17T14:38:45.540Z",
-      "type": "expense",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 6,
-      "amount": 123.65,
-      "currency": "BRL",
-      "date": "2021-06-17T14:38:45.540Z",
-      "type": "expense",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 7,
-      "amount": 200,
-      "currency": "BRL",
-      "date": "2021-06-17T14:38:45.540Z",
-      "type": "expense",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 8,
-      "amount": 6.5,
-      "currency": "BRL",
-      "date": "2021-07-17T14:38:45.540Z",
-      "type": "expense",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 9,
-      "amount": 123,
-      "currency": "BRL",
-      "date": "2021-07-17T14:38:45.540Z",
-      "type": "expense",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "id": 10,
-      "amount": 20,
-      "currency": "BRL",
-      "date": "2021-12-17T14:38:45.540Z",
-      "type": "expense",
-      "isPayed": null,
-      "description": "Recebimento de empréstimo"
-    },
-    {
-      "type": "incoming",
-      "amount": 5000,
-      "date": "2021-12-09T03:00:00.000Z",
-      "description": "Algumas paradas aí",
+      "amount": 2100,
+      "date": "2021-12-01T03:00:00.000Z",
+      "description": "Recebimento de Salário",
       "isPayed": false,
-      "id": 11
+      "id": 1
     },
     {
       "type": "expense",
-      "amount": 12,
-      "date": "2021-12-20T03:00:00.000Z",
-      "description": "Agora ée",
+      "amount": 18.99,
+      "date": "2021-12-08T03:00:00.000Z",
+      "description": "Parcela da Netflix",
       "isPayed": false,
-      "id": 12
+      "id": 2
+    },
+    {
+      "type": "expense",
+      "amount": 300,
+      "date": "2021-11-25T03:00:00.000Z",
+      "description": "Empréstimo Mãe",
+      "isPayed": false,
+      "id": 3
     },
     {
       "type": "incoming",
-      "amount": 122,
-      "date": "2021-12-21T03:00:00.000Z",
-      "description": "aeqeqwqwe",
+      "amount": 600,
+      "date": "2021-11-15T03:00:00.000Z",
+      "description": "Adiantamento de Salário",
       "isPayed": false,
-      "id": 13
+      "id": 4
     },
     {
       "type": "expense",
-      "amount": 1313,
-      "date": "2021-12-22T03:00:00.000Z",
-      "description": "13132312",
+      "amount": 45.23,
+      "date": "2021-10-06T03:00:00.000Z",
+      "description": "Aquele gasto maroto",
       "isPayed": false,
-      "id": 14
+      "id": 5
+    },
+    {
+      "type": "incoming",
+      "amount": 225,
+      "date": "2021-12-13T03:00:00.000Z",
+      "description": "Sei la money money",
+      "isPayed": false,
+      "id": 6
+    },
+    {
+      "type": "expense",
+      "amount": 1000,
+      "date": "2021-12-13T03:00:00.000Z",
+      "description": "Roubo do caixa",
+      "isPayed": false,
+      "id": 7
     }
   ]
 }
