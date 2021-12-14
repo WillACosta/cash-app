@@ -25,3 +25,18 @@ mat-paginator {
     padding-top: rem-calc(5);
   }
 }
+
+mat-icon {
+  font-size: rem-calc(20);
+  color: var(--textVariant);
+}
+
+.edit:hover {
+  color: #68b0ab;
+  transition: color 0.5s ease;
+}
+
+.delete:hover {
+  color: #B84A62;
+  transition: color 0.5s ease;
+}

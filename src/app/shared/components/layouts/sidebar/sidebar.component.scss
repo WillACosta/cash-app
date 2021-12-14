@@ -4,6 +4,10 @@
   margin-right: rem-calc(8);
 }
 
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
+
 aside {
   display: flex;
   flex-direction: column;
@@ -35,6 +39,7 @@ aside {
 
         mat-icon,
         span {
+          @extend .transition-all;
           color: var(--primary);
         }
       }
@@ -42,6 +47,7 @@ aside {
 
     mat-icon,
     span {
+      @extend .transition-all;
       color: var(--textVariant);
     }
 
@@ -50,17 +56,20 @@ aside {
     }
 
     .active {
+      @extend .transition-all;
       color: var(--primary);
       text-decoration: none;
 
       mat-icon,
       span {
+        @extend .transition-all;
         color: var(--primary);
       }
     }
   }
 
   button {
+    @extend .transition-all;
     color: var(--textVariant);
 
     mat-icon {

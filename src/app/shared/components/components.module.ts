@@ -14,6 +14,7 @@ import { ApiErrorDialogComponent } from './molecules/api-error-dialog/api-error-
 import { TransactionDialogComponent } from './molecules/transaction-dialog/transaction-dialog.component';
 
 import { MaterialModule } from '../material.module';
+import { ConfirmDeleteDialogComponent } from './molecules/confirm-delete-dialog/confirm-delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MaterialModule } from '../material.module';
     ButtonComponent,
     ApiErrorDialogComponent,
     TransactionDialogComponent,
+    ConfirmDeleteDialogComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, RouterModule, MaterialModule],
   exports: [

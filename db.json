@@ -1,28 +1,3 @@
 {
-  "transactions": [
-    {
-      "description": "Salário",
-      "amount": 1200,
-      "type": "incoming",
-      "date": "2021-12-01T03:00:00.000Z",
-      "isPayed": false,
-      "id": 1
-    },
-    {
-      "type": "incoming",
-      "amount": 50,
-      "date": "2021-10-07T03:00:00.000Z",
-      "description": "Achado na rua",
-      "isPayed": false,
-      "id": 6
-    },
-    {
-      "description": "Money In",
-      "amount": 100,
-      "type": "incoming",
-      "date": "2021-12-14T03:00:00.000Z",
-      "isPayed": false,
-      "id": 7
-    }
-  ]
+  "transactions": []
 }

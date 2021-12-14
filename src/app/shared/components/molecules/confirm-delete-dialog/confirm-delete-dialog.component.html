@@ -1,0 +1,11 @@
+<h1>Excluir</h1>
+
+<p class="pb-4">Você realmente deseja excluir esta transação?</p>
+
+<div class="cash-modal-footer">
+  <app-button (onClickedEvent)="closeModal()" label="Cancelar"
+    type="text">
+  </app-button>
+
+  <button mat-flat-button color="warn" (click)="confirm()">Sim</button>
+</div>

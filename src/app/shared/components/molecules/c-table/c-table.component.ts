@@ -21,6 +21,7 @@ import { getRangeLabel } from '../../../../core/utils';
 import { GetPaginatedTransactions } from '../../../../modules/main-app/store/actions/main.actions';
 import { UpdateTransactions } from '../../../../shared/store/shared.actions';
 import { TransactionDialogComponent } from '../transaction-dialog/transaction-dialog.component';
+import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
   selector: 'app-c-table',
@@ -84,7 +85,14 @@ export class CTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteTransaction(transaction: Transaction) {
-    this._store.dispatch(new DeleteTransaction(String(transaction.id)));
+    this.dialog
+      .open(ConfirmDeleteDialogComponent)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this._store.dispatch(new DeleteTransaction(String(transaction.id)));
+        }
+      });
   }
 
   private setListeners() {
