@@ -32,11 +32,11 @@ mat-icon {
 }
 
 .edit:hover {
-  color: #68b0ab;
+  color: var(--info);
   transition: color 0.5s ease;
 }
 
 .delete:hover {
-  color: #B84A62;
+  color: var(--warn);
   transition: color 0.5s ease;
 }

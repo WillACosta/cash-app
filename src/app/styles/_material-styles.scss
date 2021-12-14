@@ -5,8 +5,8 @@ mat-form-field {
   mat-label {
     margin-left: rem-calc(5);
   }
+}
 
-  mat-icon {
-    color: var(--textVariant);
-  }
+mat-icon {
+  color: var(--textVariant);
 }

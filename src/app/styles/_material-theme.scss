@@ -40,9 +40,42 @@ $cash-app-palette: (
   ),
 );
 
+$cash-app-warn-palette: (
+  50: #f6e9ec,
+  100: #eac9d0,
+  200: #dca5b1,
+  300: #cd8091,
+  400: #c3657a,
+  500: #b84a62,
+  600: #b1435a,
+  700: #a83a50,
+  800: #a03246,
+  900: #912234,
+  A100: #ffcfd6,
+  A200: #ff9caa,
+  A400: #ff697e,
+  A700: #ff4f68,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  ),
+);
+
 $my-app-primary: mat-palette($cash-app-palette, 500);
 $my-app-accent: mat-palette($mat-green, 500, 900, A100);
-$my-app-warn: mat-palette($mat-deep-orange);
+$my-app-warn: mat-palette($cash-app-warn-palette);
 
 $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 @include angular-material-theme($my-app-theme);

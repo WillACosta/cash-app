@@ -1,6 +1,7 @@
 <button
-  *ngIf="type === 'primary'"
   mat-flat-button
+  color="primary"
+  *ngIf="type === 'primary'"
   [disabled]="disabled"
   (click)="onClickHandler()">
   {{ label }}

@@ -10,9 +10,14 @@ $surfaceDark: #2c2c2c;
 $textColorLight: #636363;
 $textColorDark: #828282;
 
+$warn: #b84a62;
+$info: #68b0ab;
+
 :root {
   --primary: #{$primay};
   --gradient: #{$gradient};
+  --warn: #{$warn};
+  --info: #{$info};
   --textPrimary: #{$backgroundDark};
   --textVariant: #{$textColorLight};
   --surface: #{$surfaceLight};
@@ -22,6 +27,8 @@ $textColorDark: #828282;
 .dark-theme {
   --primary: #{$primay};
   --gradient: #{$gradient};
+  --warn: #{$warn};
+  --info: #{$info};
   --textPrimary: #{$backgroundLight};
   --textVariant: #{$textColorDark};
   --surface: #{$surfaceDark};
