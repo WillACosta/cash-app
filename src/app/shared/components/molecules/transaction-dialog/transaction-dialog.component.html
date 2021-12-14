@@ -1,6 +1,7 @@
 <div class="cash-modal">
   <div class="cash-modal-header">
-    <h1>Nova transação</h1>
+    <h1 *ngIf="!data.isEdit">Nova transação</h1>
+    <h1 *ngIf="data.isEdit">Editar transação</h1>
   </div>
 
   <div class="cash-modal-body mt-5">
@@ -44,7 +45,7 @@
     </app-loading-button>
 
     <app-button *ngIf="pageState != PageStateType.loading"
-      (onClickedEvent)="saveTransaction()" label="Salvar"
+      (onClickedEvent)="saveOrUpdateTransaction()" label="Salvar"
       [disabled]="transactionForm.invalid"></app-button>
   </div>
 </div>

@@ -9,10 +9,10 @@
       "id": 1
     },
     {
-      "description": "Achado na rua",
-      "amount": 100,
       "type": "incoming",
+      "amount": 50,
       "date": "2021-10-07T03:00:00.000Z",
+      "description": "Achado na rua",
       "isPayed": false,
       "id": 6
     },

@@ -36,7 +36,7 @@ export class TransactionsService {
 
   saveTransaction(payload: TransactionProps) {
     return this.httpClient
-      .post<Transaction>(environment.appApis.transactions, payload)
+      .post<void>(environment.appApis.transactions, payload)
       .pipe(retry(2));
   }
 
