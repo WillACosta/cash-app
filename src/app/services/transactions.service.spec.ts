@@ -77,7 +77,7 @@ describe('TransactionsService', () => {
     };
 
     const payload: TransactionProps = {
-      type: 'incoming', // incoming
+      type: 'incoming',
       date: '2020-01-01',
       description: 'test',
       amount: 100,
@@ -90,6 +90,35 @@ describe('TransactionsService', () => {
       expect(fakeHttpClient).toBeCalledWith(transactionsUrl, {
         body: expectedPayloadValue,
       });
+    });
+  });
+
+  test('should delete an transaction by passing id', () => {
+    fakeHttpClient.delete.mockImplementationOnce(() => of({}));
+
+    service.deleteTransaction('1').subscribe((response) => {
+      expect(fakeHttpClient).toBeCalledWith(`${transactionsUrl}/1`);
+      expect(response).toEqual({});
+    });
+  });
+
+  test('should updated an transaction by id', () => {
+    fakeHttpClient.put.mockImplementationOnce(() => of({}));
+
+    const payload: TransactionProps = {
+      type: 'incoming',
+      date: '2020-01-01',
+      description: 'test',
+      amount: 100,
+      isPayed: null,
+    } as TransactionProps;
+
+    service.updateTransaction('1', payload).subscribe((response) => {
+      expect(fakeHttpClient).toBeCalledWith(`${transactionsUrl}/1`, {
+        body: payload,
+      });
+
+      expect(response).toEqual({});
     });
   });
 });

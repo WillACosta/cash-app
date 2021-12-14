@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofActionSuccessful } from '@ngxs/store';
 
-import { NewTransactionDialogComponent } from './components/new-transaction-dialog/new-transaction-dialog.component';
-import { SaveTransaction } from './store/transactions.actions';
+import { TransactionDialogComponent } from '../../../../shared/components/molecules/transaction-dialog/transaction-dialog.component';
 
 @Component({
   selector: 'app-transactions',
@@ -16,9 +15,12 @@ export class TransactionsComponent implements OnInit {
   ngOnInit(): void {}
 
   openNewTransactionDialog() {
-    this.dialog.open(NewTransactionDialogComponent, {
+    this.dialog.open(TransactionDialogComponent, {
       maxWidth: '400px',
       minWidth: '350px',
+      data: {
+        isEdit: false,
+      }
     });
   }
 }

@@ -40,6 +40,18 @@ export class TransactionsService {
       .pipe(retry(2));
   }
 
+  deleteTransaction(id: string) {
+    return this.httpClient
+      .delete<void>(`${environment.appApis.transactions}/${id}`)
+      .pipe(retry(2));
+  }
+
+  updateTransaction(id: string, payload: TransactionProps) {
+    return this.httpClient
+      .put<void>(`${environment.appApis.transactions}/${id}`, payload)
+      .pipe(retry(2));
+  }
+
   private getQueryParams(
     page: number,
     limit: number,

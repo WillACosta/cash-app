@@ -3,14 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
-
 import { LogoComponent } from './atoms/logo/logo.component';
 import { LoadingButtonComponent } from './atoms/loading-button/loading-button.component';
 import { ThemeSwitcherComponent } from './atoms/theme-swicther/theme-switcher.component';
@@ -19,6 +11,9 @@ import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { CTableComponent } from './molecules/c-table/c-table.component';
 import { ButtonComponent } from './atoms/button/button.component';
 import { ApiErrorDialogComponent } from './molecules/api-error-dialog/api-error-dialog.component';
+import { TransactionDialogComponent } from './molecules/transaction-dialog/transaction-dialog.component';
+
+import { MaterialModule } from '../material.module';
 
 @NgModule({
   declarations: [
@@ -29,19 +24,9 @@ import { ApiErrorDialogComponent } from './molecules/api-error-dialog/api-error-
     CTableComponent,
     ButtonComponent,
     ApiErrorDialogComponent,
+    TransactionDialogComponent,
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, MaterialModule],
   exports: [
     LogoComponent,
     LoadingButtonComponent,
@@ -49,6 +34,7 @@ import { ApiErrorDialogComponent } from './molecules/api-error-dialog/api-error-
     ThemeSwitcherComponent,
     CTableComponent,
     ButtonComponent,
+    TransactionDialogComponent,
   ],
 })
 export class ComponentsModule {}

@@ -6,8 +6,8 @@ import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription, tap } from 'rxjs';
 
-import { SaveTransaction } from '../../store/transactions.actions';
-import { UpdateTransactions } from '../../../../../../shared/store/shared.actions';
+import { SaveTransaction } from '../../../../modules/main-app/pages/transactions/store/transactions.actions';
+import { UpdateTransactions } from '../../../store/shared.actions';
 
 enum PageState {
   initial,
@@ -16,19 +16,18 @@ enum PageState {
 }
 
 @Component({
-  selector: 'app-new-transaction-dialog',
-  templateUrl: './new-transaction-dialog.component.html',
-  styleUrls: ['./new-transaction-dialog.component.scss'],
+  selector: 'app-transaction-dialog',
+  templateUrl: './transaction-dialog.component.html',
 })
-export class NewTransactionDialogComponent implements OnInit, OnDestroy {
+export class TransactionDialogComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
-    private dialogRef: MatDialogRef<NewTransactionDialogComponent>,
+    private dialogRef: MatDialogRef<TransactionDialogComponent>,
     private actions$: Actions,
     private toastr: ToastrService
   ) {}
 
-  newTransactionForm: FormGroup;
+  transactionForm: FormGroup;
 
   transactionType = [
     { value: 'incoming', viewValue: 'Entrada' },
@@ -50,13 +49,13 @@ export class NewTransactionDialogComponent implements OnInit, OnDestroy {
   }
 
   saveTransaction() {
-    if (this.newTransactionForm.invalid) return;
+    if (this.transactionForm.invalid) return;
 
     this.pageState = this.PageStateType.loading;
 
     const payload = {
-      ...this.newTransactionForm.value,
-      amount: Number(this.newTransactionForm.value.amount),
+      ...this.transactionForm.value,
+      amount: Number(this.transactionForm.value.amount),
     };
 
     this.store.dispatch(new SaveTransaction(payload));
@@ -64,12 +63,12 @@ export class NewTransactionDialogComponent implements OnInit, OnDestroy {
   }
 
   closeModal() {
-    this.newTransactionForm.reset();
+    this.transactionForm.reset();
     this.dialogRef.close();
   }
 
   private initForm() {
-    this.newTransactionForm = new FormGroup({
+    this.transactionForm = new FormGroup({
       type: new FormControl('', [Validators.required]),
       amount: new FormControl(null, [
         Validators.pattern('^[0-9]+(.[0-9]{1,2})?$'),

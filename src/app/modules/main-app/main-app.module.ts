@@ -13,7 +13,6 @@ import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { LineChartComponent } from './pages/dashboard/components/line-chart/line-chart.component';
-import { NewTransactionDialogComponent } from './pages/transactions/components/new-transaction-dialog/new-transaction-dialog.component';
 import { MaterialModule } from 'src/app/shared/material.module';
 
 import { MainState } from './store/state/main.state';
@@ -26,7 +25,6 @@ import { TransactionsState } from './pages/transactions/store/transactions.state
     TransactionsComponent,
     SettingsComponent,
     LineChartComponent,
-    NewTransactionDialogComponent,
   ],
   imports: [
     CommonModule,

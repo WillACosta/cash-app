@@ -4,7 +4,7 @@
   </div>
 
   <div class="cash-modal-body mt-5">
-    <form [formGroup]="newTransactionForm">
+    <form [formGroup]="transactionForm">
       <mat-form-field appearance="outline">
         <mat-label>Tipo</mat-label>
         <mat-select
@@ -45,6 +45,6 @@
 
     <app-button *ngIf="pageState != PageStateType.loading"
       (onClickedEvent)="saveTransaction()" label="Salvar"
-      [disabled]="newTransactionForm.invalid"></app-button>
+      [disabled]="transactionForm.invalid"></app-button>
   </div>
 </div>

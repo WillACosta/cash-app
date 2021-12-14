@@ -9,7 +9,11 @@ import {
 import { HandleApiError } from '../../../../../shared/store/api-error/api-error.actions';
 import { TransactionProps } from '../../../../../models/transaction.model';
 
-import { SaveTransaction } from './transactions.actions';
+import {
+  DeleteTransaction,
+  SaveTransaction,
+  UpdateTransaction,
+} from './transactions.actions';
 import { TransactionsState } from './transactions.state';
 
 const fakeTransactionProps: TransactionProps = {
@@ -36,7 +40,7 @@ describe('TransactionState', () => {
   });
 
   describe('State Actions', () => {
-    test('should save an transaction', () => {
+    test('should call the saveTransaction method', () => {
       service.saveTransaction.mockReturnValue(of({}));
 
       transactionState.saveTransaction(
@@ -44,7 +48,29 @@ describe('TransactionState', () => {
         new SaveTransaction(fakeTransactionProps)
       );
 
-      expect(service.saveTransaction).toHaveBeenCalled();
+      expect(service.saveTransaction).toBeCalled();
+    });
+
+    test('should call deleteTransaction method', () => {
+      service.deleteTransaction.mockReturnValue(of({}));
+
+      transactionState.deleteTransaction(
+        stateContext,
+        new DeleteTransaction('1')
+      );
+
+      expect(service.deleteTransaction).toBeCalled();
+    });
+
+    test('should call updateTransaction method', () => {
+      service.updateTransaction.mockReturnValue(of({}));
+
+      transactionState.updateTransaction(
+        stateContext,
+        new UpdateTransaction('1', fakeTransactionProps)
+      );
+
+      expect(service.updateTransaction).toBeCalled();
     });
 
     test('should dispatch action to handle error', (done) => {

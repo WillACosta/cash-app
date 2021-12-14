@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -10,16 +9,18 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
-
 import { merge, of as observableOf, Subscription } from 'rxjs';
 import { catchError, map, startWith, switchMap, tap } from 'rxjs/operators';
 
-import { getRangeLabel } from '../../../../core/utils';
 import { Transaction } from '../../../../models/transaction.model';
+import { DeleteTransaction } from '../../../../modules/main-app/pages/transactions/store/transactions.actions';
+import { getRangeLabel } from '../../../../core/utils';
 import { GetPaginatedTransactions } from '../../../../modules/main-app/store/actions/main.actions';
 import { UpdateTransactions } from '../../../../shared/store/shared.actions';
+import { TransactionDialogComponent } from '../transaction-dialog/transaction-dialog.component';
 
 @Component({
   selector: 'app-c-table',
@@ -46,7 +47,7 @@ export class CTableComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private _store: Store,
     private actions$: Actions,
-    private changeDetectorRefs: ChangeDetectorRef
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -69,6 +70,21 @@ export class CTableComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  editTransaction(transaction: Transaction) {
+    this.dialog.open(TransactionDialogComponent, {
+      maxWidth: '400px',
+      minWidth: '350px',
+      data: {
+        transaction: transaction,
+        isEdit: true,
+      },
+    });
+  }
+
+  deleteTransaction(transaction: Transaction) {
+    this._store.dispatch(new DeleteTransaction(String(transaction.id)));
   }
 
   private setListeners() {
