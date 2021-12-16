@@ -4,15 +4,14 @@ import { Action, State, StateContext } from '@ngxs/store';
 import { catchError, tap } from 'rxjs';
 
 import { HandleApiError } from '../../../../../shared/store/api-error/api-error.actions';
-import { TransactionsService } from '../../../../../services/transactions.service';
+import { TransactionsService } from '../../../services/transactions.service';
+import { UpdateTransactions } from '../../../../../shared/store/shared.actions';
 
 import {
   DeleteTransaction,
   SaveTransaction,
   UpdateTransaction,
 } from './transactions.actions';
-
-import { UpdateTransactions } from '../../../../../shared/store/shared.actions';
 
 @State({
   name: 'transactionsState',

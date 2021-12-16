@@ -8,7 +8,7 @@ import { combineLatest, Observable, Subscription } from 'rxjs';
 import { MainState } from '../../../../../../modules/main-app/store/state/main.state';
 import { Transaction } from '../../../../../../models/transaction.model';
 import { UpdateTransactions } from '../../../../../../shared/store/shared.actions';
-import { ChartService } from 'src/app/services/chart.service';
+import { ChartService } from 'src/app/modules/main-app/pages/dashboard/services/chart.service';
 
 import {
   lineChartConfiguration,

@@ -1,6 +1,6 @@
 import { throwError, of } from 'rxjs';
 
-import { fakeHttpClient, provider } from '../core/spec';
+import { fakeHttpClient, provider } from '../../../core/spec';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
@@ -15,7 +15,6 @@ describe('AuthService', () => {
   });
 
   it('should request to login and return user token', () => {
-    const serviceResponse = { token: 'token' };
     fakeHttpClient.post.mockImplementationOnce(() => of({ token: 'token' }));
 
     const fakeBody = JSON.stringify({

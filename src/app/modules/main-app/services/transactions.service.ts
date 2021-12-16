@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 
 import { retry } from 'rxjs';
 
-import { environment } from '../../environments/environment';
-import { Transaction, TransactionProps } from '../models/transaction.model';
+import { environment } from '../../../../environments/environment';
+import { Transaction, TransactionProps } from '../../../models/transaction.model';
 
 @Injectable({
   providedIn: 'root',

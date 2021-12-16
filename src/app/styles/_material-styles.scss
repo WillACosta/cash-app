@@ -1,3 +1,31 @@
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table,
+.mat-paginator {
+  background: transparent !important;
+}
+
+.mat-dialog-container {
+  background: var(--background) !important;
+}
+
+table {
+  width: 100%;
+  background-color: transparent;
+}
+
+mat-paginator {
+  background-color: transparent;
+}
+
+mat-icon {
+  font-size: rem-calc(20);
+  color: var(--textVariant);
+}
+
 mat-form-field {
   color: var(--textVariant);
   width: 100%;
@@ -5,8 +33,4 @@ mat-form-field {
   mat-label {
     margin-left: rem-calc(5);
   }
-}
-
-mat-icon {
-  color: var(--textVariant);
 }

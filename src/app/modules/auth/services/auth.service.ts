@@ -7,8 +7,8 @@ import {
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 
-import { environment } from '../../environments/environment';
-import { Account } from '../models/account.model';
+import { environment } from '../../../../environments/environment';
+import { Account } from '../../../models/account.model';
 
 @Injectable({
   providedIn: 'root',

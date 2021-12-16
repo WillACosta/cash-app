@@ -1,0 +1,28 @@
+@import "../../../../styles/rem-calc";
+
+main {
+  height: 100vh;
+  padding: rem-calc(32 0);
+
+  h1 {
+    color: var(--textVariant);
+  }
+}
+
+.setting-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: rem-calc(16);
+  margin: rem-calc(16);
+  border-radius: rem-calc(16);
+
+  cursor: pointer;
+  background-color: var(--surface);
+  color: var(--textVariant);
+
+  p {
+    margin: 0;
+  }
+}

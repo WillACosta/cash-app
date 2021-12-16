@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs';
 
-import { TransactionsService } from '../../../../services/transactions.service';
+import { TransactionsService } from '../../services/transactions.service';
 
 import {
   PaginatedTransactions,

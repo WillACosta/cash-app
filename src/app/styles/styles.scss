@@ -1,10 +1,10 @@
 @import "./rem-calc";
-@import "./color_theme";
+@import "./general";
 @import "./reset";
 
-@import "./typography";
-@import "./utilities";
 @import "./material-theme";
 @import "./material-styles";
 
-@import './general';
+@import "./color_theme";
+@import "./typography";
+@import "./utilities";

@@ -1,4 +1,4 @@
-import { AccountProps } from "src/app/models/account-props.model";
+import { AccountProps } from "../../../../models/account-props.model";
 
 export class Login {
   static readonly type = '[AUTH] Login';

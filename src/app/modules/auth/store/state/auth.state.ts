@@ -3,7 +3,7 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs';
 
 import { Account } from '../../../../models/account.model';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Login, Logout } from '../actions/auth.actions';
 
 @State<Account>({

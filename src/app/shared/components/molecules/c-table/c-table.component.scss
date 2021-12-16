@@ -1,19 +1,5 @@
 @import "../../../../styles/rem-calc";
 
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-
-table {
-  width: 100%;
-  background-color: transparent;
-}
-
-mat-paginator {
-  background-color: transparent;
-}
-
 .transaction-type {
   display: flex;
   align-items: center;
@@ -26,11 +12,6 @@ mat-paginator {
   }
 }
 
-mat-icon {
-  font-size: rem-calc(20);
-  color: var(--textVariant);
-}
-
 .edit:hover {
   color: var(--info);
   transition: color 0.5s ease;
@@ -39,4 +20,12 @@ mat-icon {
 .delete:hover {
   color: var(--warn);
   transition: color 0.5s ease;
+}
+
+.incoming-state {
+  color: var(--info);
+}
+
+.expense-state {
+  color: var(--warn);
 }
