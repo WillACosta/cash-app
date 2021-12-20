@@ -11,6 +11,7 @@ import { of } from 'rxjs';
 
 const storeMock = {
   dispatch: jest.fn(),
+  selectSnapshot: jest.fn(),
 };
 
 const actionsMock$ = of({});

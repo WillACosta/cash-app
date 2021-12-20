@@ -10,7 +10,8 @@ import {
 } from '@ngxs/store';
 
 import { ToastrService } from 'ngx-toastr';
-import { Subject, Subscription, takeUntil, tap } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
+import { ThemeProps } from 'src/app/shared/store/theme/theme.actions';
 
 import { Login } from '../../store/actions/auth.actions';
 
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   email?: string;
   password?: string;
+  themeMode: ThemeProps;
 
   hideText: Boolean = true;
 
@@ -51,6 +53,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.generateLoginForm();
     this.setListeners();
+    this.getThemeModeFromState();
+  }
+
+  getThemeModeFromState() {
+    const theme = this.store.selectSnapshot<ThemeProps>(
+      (state) => state.theme.activeTheme
+    );
+
+    return (this.themeMode = theme);
   }
 
   ngOnDestroy(): void {

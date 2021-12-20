@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row pt-5">
     <div class="col-12">
-      <app-logo type="light"></app-logo>
+      <app-logo *ngIf="themeMode.mode === 'light'" type="light"></app-logo>
+      <app-logo *ngIf="themeMode.mode === 'dark'" type="dark"></app-logo>
     </div>
   </div>
 
@@ -9,7 +10,15 @@
     <div class="col-12 col-md-12 col-lg-8 col-xl-8 centralize">
       <div class="illustration-container">
         <img
+          *ngIf="themeMode.mode === 'light'"
           src="assets/payment.svg"
+          alt="Ilustração de um homem de pele escura segurando um cartão de
+          crédito na cor verde"
+          />
+
+        <img
+          *ngIf="themeMode.mode === 'dark'"
+          src="assets/payment_dark.svg"
           alt="Ilustração de um homem de pele escura segurando um cartão de
           crédito na cor verde"
           />
