@@ -24,18 +24,6 @@ export const lineChartConfiguration: ChartConfiguration['data'] = {
       pointHoverBorderColor: 'rgba(77,83,96,1)',
       fill: 'origin',
     },
-    // {
-    //   data: [],
-    //   label: 'Diferença',
-    //   yAxisID: 'y-axis-1',
-    //   backgroundColor: 'rgba(148,159,177,0.2)',
-    //   borderColor: 'rgba(148,159,177,1)',
-    //   pointBackgroundColor: 'rgba(148,159,177,1)',
-    //   pointBorderColor: '#fff',
-    //   pointHoverBackgroundColor: '#fff',
-    //   pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-    //   fill: 'origin',
-    // },
   ],
   labels: [],
 };

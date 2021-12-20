@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 
 import * as _ from 'lodash';
 
@@ -20,7 +21,7 @@ export class ChartService {
     );
 
     const groupedByMont = _.groupBy(orderedByDate, (item) =>
-      format(new Date(item.date), 'MMMM')
+      format(new Date(item.date), 'LLLL', { locale: ptBR })
     );
 
     const convertedArray = this.objectToArray(groupedByMont);
@@ -34,7 +35,11 @@ export class ChartService {
     expenseLabels: Array<any>
   ): Array<string> {
     const mergedLabels = _.merge(incomingLabels, expenseLabels);
-    return _.uniq(mergedLabels);
+    return _.uniq(
+      mergedLabels.map(
+        (item: string) => item.charAt(0).toUpperCase() + item.slice(1)
+      )
+    );
   }
 
   getCorrelatedMonthValues(incoming: any, expense: any) {
