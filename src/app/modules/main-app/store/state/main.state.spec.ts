@@ -67,6 +67,7 @@ describe('MainState', () => {
       const actualValue = MainState.allTransactions(
         mocks.mockMainStateValue as any
       );
+
       expect(actualValue).toEqual(mocks.fakeTransactionsData);
     });
 

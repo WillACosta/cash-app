@@ -8,8 +8,14 @@
   background: transparent !important;
 }
 
-.mat-dialog-container {
+.mat-dialog-container,
+.mat-option {
   background: var(--background) !important;
+}
+
+.mat-option.mat-active,
+.mat-datepicker-content {
+  background: var(--surface) !important;
 }
 
 table {

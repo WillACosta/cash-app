@@ -10,7 +10,13 @@
       <div class="col-12">
         <div class="setting-tile">
           <p class="mx-4">Ativar modo escuro</p>
-          <mat-slide-toggle color="primary" (click)="toggle()"></mat-slide-toggle>
+
+          <form [formGroup]="themeForm">
+            <mat-slide-toggle color="primary" formControlName="darkMode"
+              (change)="toggleTheme()">
+            </mat-slide-toggle>
+          </form>
+
         </div>
       </div>
     </div>

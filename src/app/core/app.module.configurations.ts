@@ -10,5 +10,5 @@ export const ngxsModuleConfig = {
 };
 
 export const ngxsStoragePluginConfig = {
-  key: 'auth.token',
+  key: ['auth.token', 'theme.activeTheme'],
 };

@@ -14,11 +14,7 @@ import { Account } from '../../../models/account.model';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl: string;
-
-  constructor(private httpClient: HttpClient) {
-    this.baseUrl = 'https://reqres.in/api';
-  }
+  constructor(private httpClient: HttpClient) {}
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
