@@ -87,7 +87,7 @@ export class TransactionDialogComponent implements OnInit, OnDestroy {
         description: new FormControl(transaction.description, [
           Validators.required,
         ]),
-        isPayed: new FormControl(transaction.isPayed),
+        isPayedOrReceived: new FormControl(transaction.isPayedOrReceived),
       });
     } else {
       this.transactionForm = new FormGroup({
@@ -98,7 +98,7 @@ export class TransactionDialogComponent implements OnInit, OnDestroy {
         ]),
         date: new FormControl('', [Validators.required]),
         description: new FormControl('', [Validators.required]),
-        isPayed: new FormControl(false),
+        isPayedOrReceived: new FormControl(false),
       });
     }
   }

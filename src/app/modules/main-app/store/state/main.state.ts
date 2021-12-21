@@ -46,12 +46,26 @@ export class MainState {
 
   @Selector()
   static incomingTransactions(state: MainStateModel): Transaction[] {
-    return this.getFilteredTransactions(state.allTransactions, 'incoming');
+    return state.allTransactions.filter((t) => t.type === 'incoming');
   }
 
   @Selector()
   static expenseTransactions(state: MainStateModel): Transaction[] {
-    return this.getFilteredTransactions(state.allTransactions, 'expense');
+    return state.allTransactions.filter((t) => t.type === 'expense');
+  }
+
+  @Selector()
+  static receivedIncomingTransactions(state: MainStateModel): Transaction[] {
+    return state.allTransactions.filter(
+      (t) => t.isPayedOrReceived === true && t.type === 'incoming'
+    );
+  }
+
+  @Selector()
+  static payedExpenseTransactions(state: MainStateModel): Transaction[] {
+    return state.allTransactions.filter(
+      (t) => t.isPayedOrReceived === true && t.type === 'expense'
+    );
   }
 
   @Action(GetAllTransactions)
@@ -95,14 +109,5 @@ export class MainState {
           })
         )
       );
-  }
-
-  private static getFilteredTransactions(
-    transactions: Transaction[],
-    filterBy: string
-  ): Transaction[] {
-    return transactions.filter((transaction) => {
-      return transaction.type === filterBy;
-    });
   }
 }

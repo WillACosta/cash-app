@@ -19,6 +19,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const materialModules = [
   MatInputModule,
@@ -40,6 +41,7 @@ const materialModules = [
   MatSlideToggleModule,
   MatSidenavModule,
   MatCardModule,
+  MatCheckboxModule,
 ];
 
 @NgModule({

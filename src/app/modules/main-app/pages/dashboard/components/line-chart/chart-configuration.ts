@@ -29,6 +29,7 @@ export const lineChartConfiguration: ChartConfiguration['data'] = {
 };
 
 export const lineChartOptions: ChartConfiguration['options'] = {
+  responsive: true,
   elements: {
     line: {
       tension: 0.5,
@@ -43,6 +44,16 @@ export const lineChartOptions: ChartConfiguration['options'] = {
       position: 'right',
       grid: {
         color: 'rgba(148,159,177,1)',
+      },
+    },
+  },
+  locale: 'pt-br',
+  plugins: {
+    tooltip: {
+      callbacks: {
+        label: (tooltipItem) => {
+          return `R$ ${tooltipItem.formattedValue}`;
+        },
       },
     },
   },

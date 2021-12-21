@@ -1,12 +1,13 @@
 import { Deserializable } from './deserializable.model';
 
 export class Transaction implements Deserializable {
+  [key: string]: any;
   id: number;
   amount: number;
   currency: string;
   date: string;
   type: string;
-  isPayed: boolean | null;
+  isPayedOrReceived: boolean | null;
   description: string;
 
   deserialize(input: any) {
@@ -20,7 +21,7 @@ export interface TransactionProps {
   date: string;
   description: string;
   amount: number;
-  isPayed: boolean | null;
+  isPayedOrReceived: boolean | null;
 }
 
 export interface PaginatedTransactions {

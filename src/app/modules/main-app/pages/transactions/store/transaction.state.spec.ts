@@ -21,7 +21,7 @@ const fakeTransactionProps: TransactionProps = {
   amount: 100,
   date: '2021-01-01',
   description: 'test',
-  isPayed: null,
+  isPayedOrReceived: null,
 };
 
 describe('TransactionState', () => {

@@ -54,7 +54,7 @@ describe('MainState', () => {
           expect(stateContext.patchState).toHaveBeenCalledWith({
             paginatedTransactions: {
               transactions: mocks.fakeTransactionsData,
-              resultsLength: 2,
+              resultsLength: 4,
             },
           });
           done();
@@ -95,6 +95,22 @@ describe('MainState', () => {
       );
 
       expect(actualValue).toEqual(mocks.mockExpenseTransactions);
+    });
+
+    test('should select receivedIncomingTransactions in the state', () => {
+      const actualValue = MainState.receivedIncomingTransactions(
+        mocks.mockMainStateValue as any
+      );
+
+      expect(actualValue).toEqual(mocks.receivedIncomingTransactions);
+    });
+
+    test('should select payedExpenseTransactions in the state', () => {
+      const actualValue = MainState.payedExpenseTransactions(
+        mocks.mainStateData as any
+      );
+
+      expect(actualValue).toEqual(mocks.payedExpenseTransactions);
     });
   });
 });

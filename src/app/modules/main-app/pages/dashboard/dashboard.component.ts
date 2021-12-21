@@ -16,10 +16,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   @Select(MainState.allTransactions)
   transactions$: Observable<Transaction[]>;
 
-  @Select(MainState.incomingTransactions)
+  @Select(MainState.receivedIncomingTransactions)
   incomingTransactions$: Observable<Transaction[]>;
 
-  @Select(MainState.expenseTransactions)
+  @Select(MainState.payedExpenseTransactions)
   expenseTransactions$: Observable<Transaction[]>;
 
   subscriptions: Subscription[] = [

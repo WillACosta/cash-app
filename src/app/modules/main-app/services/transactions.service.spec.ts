@@ -50,7 +50,7 @@ describe('TransactionsService', () => {
       date: '2020-01-01',
       description: 'test',
       amount: 100,
-      isPayed: null,
+      isPayedOrReceived: null,
     };
 
     fakeHttpClient.post.mockImplementationOnce(() => of({}));
@@ -71,7 +71,7 @@ describe('TransactionsService', () => {
       date: '2020-01-01T00:00:00.000Z',
       description: 'test',
       amount: 100,
-      isPayed: null,
+      isPayedOrReceived: null,
       currency: 'BRL',
     };
 
@@ -80,7 +80,7 @@ describe('TransactionsService', () => {
       date: '2020-01-01',
       description: 'test',
       amount: 100,
-      isPayed: null,
+      isPayedOrReceived: null,
     };
 
     fakeHttpClient.post.mockImplementationOnce(() => of({}));
@@ -109,7 +109,7 @@ describe('TransactionsService', () => {
       date: '2020-01-01',
       description: 'test',
       amount: 100,
-      isPayed: null,
+      isPayedOrReceived: null,
     } as TransactionProps;
 
     service.updateTransaction('1', payload).subscribe((response) => {

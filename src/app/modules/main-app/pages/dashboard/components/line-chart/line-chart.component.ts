@@ -29,10 +29,10 @@ export class LineChartComponent implements OnInit, OnDestroy {
 
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
-  @Select(MainState.incomingTransactions)
+  @Select(MainState.receivedIncomingTransactions)
   incomingTransactions$: Observable<Transaction[]>;
 
-  @Select(MainState.expenseTransactions)
+  @Select(MainState.payedExpenseTransactions)
   expenseTransactions$: Observable<Transaction[]>;
 
   subscription: Subscription = new Subscription();
