@@ -21,11 +21,13 @@ export class ThemeService {
       document.body.classList.remove('light-theme');
       document.body.classList.add('dark-theme-material', 'dark-theme');
 
+      this._overlay.getContainerElement().classList.remove('light-theme-material');
       this._overlay.getContainerElement().classList.add('dark-theme-material');
     } else {
       document.body.classList.remove('dark-theme-material', 'dark-theme');
       document.body.classList.add('light-theme');
 
+      this._overlay.getContainerElement().classList.remove('dark-theme-material');
       this._overlay.getContainerElement().classList.add('light-theme-material');
     }
   }
