@@ -14,14 +14,14 @@
           src="assets/payment.svg"
           alt="Ilustração de um homem de pele escura segurando um cartão de
           crédito na cor verde"
-          />
+        />
 
         <img
           *ngIf="themeMode.mode === 'dark'"
           src="assets/payment_dark.svg"
           alt="Ilustração de um homem de pele escura segurando um cartão de
           crédito na cor verde"
-          />
+        />
       </div>
     </div>
 
@@ -43,7 +43,8 @@
               placeholder="exemplo@email.com"
               name="email"
               formControlName="email"
-              />
+              data-cy="email-input"
+            />
             <mat-icon matPrefix>mail_outline</mat-icon>
           </mat-form-field>
 
@@ -55,14 +56,18 @@
               placeholder="Digite sua senha"
               name="password"
               formControlName="password"
-              />
+              data-cy="password-input"
+            />
 
             <mat-icon matPrefix>lock_outline</mat-icon>
-            <button mat-icon-button matSuffix (click)="togleInputVisibility()"
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="togleInputVisibility()"
               type="button">
-              <mat-icon>{{
-                hideText ? "visibility_off" : "visibility"
-                }}</mat-icon>
+              <mat-icon>
+                {{ hideText ? "visibility_off" : "visibility" }}
+              </mat-icon>
             </button>
           </mat-form-field>
 
@@ -73,7 +78,9 @@
             *ngIf="pageState != PageStateType.loading"
             label="Entrar"
             (onClickedEvent)="login()"
-            [disabled]="loginForm.invalid">
+            [disabled]="loginForm.invalid"
+            data-cy="login-button"
+          >
           </app-button>
         </form>
       </main>
