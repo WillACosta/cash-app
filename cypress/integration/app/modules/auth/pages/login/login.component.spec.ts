@@ -22,6 +22,6 @@ describe('Login Component', () => {
       (json) => cy.login(invalidEmail, json.password)
     )
 
-    cy.get('.toast-message').contains('Não foi possível')
+    cy.toastMessage('Não foi possível')
   })
 })
