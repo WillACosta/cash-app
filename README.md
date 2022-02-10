@@ -4,11 +4,19 @@
   <img src="./src/assets/cash-logo.svg"/>
 </div><br>
 
-Desenvolvida com Angular 13, `CashApp` é uma aplicação para registrar movimentações financeiras de entradas e saídas, fornecendo estatísticas das transações com uso de gráficos e uma interface simples e minimalista.
+Desenvolvida com Angular, `CashApp` é uma aplicação para registrar movimentações financeiras de entradas e saídas, fornecendo estatísticas das transações com uso de gráficos utiliza uma proposta de interface simples e minimalista.
 
 ## Protótipo do projeto
 
 https://www.figma.com/file/XDP3UijlKEZH1a78jTs6Vi/Desafio-PDZ?node-id=0%3A1
+
+## Detalhes Técnicos
+
+   1. [Angular 13](https://angular.io/)
+   2. Gerenciamento de Estados com [NgXS](https://www.ngxs.io/)
+   3. [Chart.js](https://www.chartjs.org/)
+   4. Testes Unitários com [Jest](https://jestjs.io/pt-BR/docs/getting-started) (Utilizando TDD)
+   5. Testes E2E com [Cypress](https://cypress.io/)
 
 ## Como usar
 
