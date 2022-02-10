@@ -1,4 +1,4 @@
-import { environment } from "src/environments/environment.prod";
+import { environment } from "src/environments/environment";
 
 Cypress.Commands.add('dataCy', (value) => {
   return cy.get(`[data-cy=${value}]`)
@@ -15,4 +15,3 @@ Cypress.Commands.add('login', (email, password) => {
   cy.get('[data-cy=login-button]').click()
   cy.wait('@loginApi')
 })
-
