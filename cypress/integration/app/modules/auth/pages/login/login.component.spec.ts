@@ -30,10 +30,10 @@ describe('Login Usuário', () => {
         cy.fixture<AuthUser>('auth_user').then(
           (json) => cy.login(invalidEmail, json.password)
         )
-      });
+      })
 
       it('Então vejo uma mensagem de erro no canto superior da tela', () => {
-        cy.toastMessage('Não foi possível')
+        cy.assertToastMessage('Não foi possível')
       })
     })
   })

@@ -11,8 +11,7 @@
         <mat-select
           data-cy="transaction-dialog-type"
           formControlName="type"
-          placeholder="Selecione"
-        >
+          placeholder="Selecione">
           <mat-option *ngFor="let type of transactionType" [value]="type.value">
             {{ type.viewValue }}
           </mat-option>
@@ -24,8 +23,7 @@
         data-cy="transaction-dialog-payed-or-received"
         formControlName="isPayedOrReceived"
         class="mb-3"
-        labelPosition="after"
-      >
+        labelPosition="after">
         Recebido
       </mat-checkbox>
 
@@ -77,10 +75,9 @@
   <div class="cash-modal-footer">
     <app-button
       (onClickedEvent)="closeModal()"
-      label="Cancelar"
       data-cy="transaction-dialog-cancel"
-      type="text"
-    >
+      label="Cancelar"
+      type="text">
     </app-button>
 
     <app-loading-button
@@ -89,8 +86,8 @@
     </app-loading-button>
 
     <app-button
-      *ngIf="pageState != PageStateType.loading"
       data-cy="transaction-dialog-save"
+      *ngIf="pageState != PageStateType.loading"
       (onClickedEvent)="saveOrUpdateTransaction()"
       label="Salvar"
       [disabled]="transactionForm.invalid"

@@ -8,9 +8,11 @@ declare namespace Cypress {
 
     /**
      * Custom command to get Toastr Modal and assert Message
-     * @example cy.toastMessage('Sorry, but there is an error.')
+     * @example cy.assertToastMessage('Sorry, but there is an error.')
+     *
+     * @param {string} message An Message to assert with Toast Dialog
      */
-    toastMessage(message: string): void;
+    assertToastMessage(message: string): void;
 
     /**
      * Custom command to select DOM element by data-cy attribute.

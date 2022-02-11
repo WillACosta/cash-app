@@ -4,7 +4,7 @@ Cypress.Commands.add('dataCy', (value) => {
   return cy.get(`[data-cy=${value}]`)
 })
 
-Cypress.Commands.add('toastMessage', (message) => {
+Cypress.Commands.add('assertToastMessage', (message) => {
   cy.get('.toast-message').contains(message)
 })
 
