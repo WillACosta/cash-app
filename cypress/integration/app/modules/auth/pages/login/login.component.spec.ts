@@ -1,27 +1,40 @@
 import { AuthUser, baseUrl } from "cypress/utils"
 
-describe('Login Component', () => {
+describe('Login Usuário', () => {
+  context('Dado que acesso a página inicial da aplicação', () => {
+    beforeEach(() => {
+      cy.visit('/')
+    })
 
-  it('should redirect to login page if user is not logged in', () => {
-   cy.visit(baseUrl)
-   cy.url().should('eq', `${baseUrl}/auth/login`)
-  })
+    context('Quando não estou logado', () => {
+      it('Então sou redirecionado para a tela de login', () => {
+        cy.url().should('eq', `${baseUrl}/auth/login`)
+      })
+    })
 
-  it('should fill the form to sign the user and redirect to dashboard page', () => {
-    cy.fixture<AuthUser>('auth_user').then(
-      (json) => cy.login(json.email, json.password)
-    )
+    context('Quando digito minhas credenciais e clico em `Entrar`', () => {
+      beforeEach(() => {
+        cy.fixture<AuthUser>('auth_user').then(
+          (json) => cy.login(json.email, json.password)
+        )
+      })
 
-    cy.url().should('eq', `${baseUrl}/dashboard`)
-  })
+      it('Então sou redirecionado para a tela de `Dashboard`', () => {
+        cy.url().should('eq', `${baseUrl}/dashboard`)
+      })
+    })
 
-  it('should display error message when user credentials are invalid', () => {
-    const invalidEmail = 'any.user@reqres.in'
+    context('Quando digito minhas credenciais inválidas e clico em `Entrar`', () => {
+      beforeEach(() => {
+        const invalidEmail = 'any.user@reqres.in'
+        cy.fixture<AuthUser>('auth_user').then(
+          (json) => cy.login(invalidEmail, json.password)
+        )
+      });
 
-    cy.fixture<AuthUser>('auth_user').then(
-      (json) => cy.login(invalidEmail, json.password)
-    )
-
-    cy.toastMessage('Não foi possível')
+      it('Então vejo uma mensagem de erro no canto superior da tela', () => {
+        cy.toastMessage('Não foi possível')
+      })
+    })
   })
 })
